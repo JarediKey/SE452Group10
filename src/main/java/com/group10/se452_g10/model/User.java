@@ -16,7 +16,6 @@ public abstract class User {
     private String gaurdianName;
     private String guardianNumber;
 
-
     public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,11 +39,50 @@ public abstract class User {
     public void setNumber(Long number){
         this.phone_Number = number;
     }
-
     public void setGaurdianName(String gaurdianName) {
         this.gaurdianName = gaurdianName;
     }
     public void setGuardianNumber(String guardianNumber) {
         this.guardianNumber = guardianNumber;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public Long getPhone_Number() {
+        return phone_Number;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public Long getSSN() {
+        return SSN;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public UUID getId() {
+        return Id;
+    }
+
+    public String getGaurdianName() {
+        return gaurdianName;
+    }
+
+    public String getGuardianNumber() {
+        return guardianNumber;
     }
 }

@@ -11,9 +11,14 @@ import jakarta.persistence.*;
 
 public class Student extends User {
 
+    private float gpa;
+
     public Student(String firstName, String lastName) {
         super(firstName,lastName);
 
+    }
+    public void setGpa(float grades){
+        this.gpa = grades;
     }
 
 

@@ -4,18 +4,28 @@ import java.util.UUID;
 
 public class admin {
 
-    private UUID adminId;
-    private String firstName;
-    private String lastName;
 
-    private String email;
+    private String username;
+    private String password;
 
-    public admin(String firstName, String lastName) {
+    public admin(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
-        this.adminId  = UUID.randomUUID();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = firstName.substring(0,2) +
-                lastName.substring(0,2) + "@depaul.edu";
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
