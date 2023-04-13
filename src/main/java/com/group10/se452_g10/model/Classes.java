@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Classes {
 
-    private ArrayList<Student> students =new ArrayList<Student>();
+    private ArrayList<String> students =new ArrayList<String>();
     private String class_name;
     private int class_id;
     private int num_students_per_class;
@@ -19,7 +19,7 @@ public class Classes {
 
     public void addStudent(Student aStudent)
     {
-        students.add(aStudent);
+        students.add(aStudent.getFirstName());
     }
 
     public String getClass_name() {
