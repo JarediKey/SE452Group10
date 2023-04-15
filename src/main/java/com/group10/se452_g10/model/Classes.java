@@ -8,7 +8,7 @@ public class Classes {
     private ArrayList<String> students =new ArrayList<String>();
     private String class_name;
     private int class_id;
-    private int num_students_per_class;
+    private int num_students_per_class = 40;
     private int num_registered;
 
 
@@ -34,7 +34,7 @@ public class Classes {
         return num_students_per_class;
     }
 
-    //Get number of students refisted to course
+    //Get number of students registered to course
     public int getNum_registered() {
         num_registered = students.size();
         return num_registered;
