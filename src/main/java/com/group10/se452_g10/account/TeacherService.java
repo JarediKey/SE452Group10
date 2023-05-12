@@ -49,7 +49,7 @@ public class TeacherService {
 
     @DeleteMapping
     @Operation(summary = "Delete the teacher")
-    public void delete(String id) {
+    public void delete(Long id) {
         log.traceEntry("Enter delete", id);
         repo.deleteById(id);
         log.traceExit("Exit delete");

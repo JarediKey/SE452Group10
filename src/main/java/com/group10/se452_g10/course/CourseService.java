@@ -9,7 +9,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/courses")
@@ -23,7 +25,7 @@ public class CourseService {
     @GetMapping
     @Operation(summary = "Returns all the Course in the database")
     @ApiResponse(responseCode = "200", description = "valid response",
-            content = {@Content(mediaType="application/json", schema=@Schema(implementation=Course.class))})
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Course.class))})
     public List<Course> list() {
         log.traceEntry("Enter list");
         var retval = repo.findAll();
@@ -46,5 +48,21 @@ public class CourseService {
         log.traceEntry("Enter delete", id);
         repo.deleteById(id);
         log.traceExit("Exit delete");
+    }
+
+    @GetMapping("/search")
+    @Operation(summary = "Search courses by keyword")
+    public List<Course> search(@RequestParam String keyword) {
+        log.traceEntry("Enter search", keyword);
+
+        String[] keywords = keyword.split(" ");
+        List<Course> courses = Arrays.stream(keywords)
+                .parallel()
+                .flatMap(kw -> repo.search(kw).stream())
+                .distinct()
+                .collect(Collectors.toList());
+
+        log.traceExit("Exit search", courses);
+        return courses;
     }
 }

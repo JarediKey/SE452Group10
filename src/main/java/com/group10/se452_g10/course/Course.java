@@ -20,4 +20,10 @@ public class Course {
     private String dept;
     private String num;
     private String name;
+
+    public Course(String dept, String num, String name) {
+        this.dept = dept;
+        this.num = num;
+        this.name = name;
+    }
 }

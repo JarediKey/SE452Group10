@@ -10,3 +10,7 @@ app:
 spring:
   profiles:
     active: dev
+
+server:
+  tomcat:
+    relaxed-query-chars: ['[', ']']

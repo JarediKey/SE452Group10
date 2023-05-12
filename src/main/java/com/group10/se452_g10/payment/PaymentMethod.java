@@ -1,5 +1,6 @@
 package com.group10.se452_g10.payment;
 
+import com.group10.se452_g10.account.Student;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +9,6 @@ import lombok.NonNull;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 
 
 @Data
@@ -16,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "payment_method", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"stu_id", "trans_id"})
+        @UniqueConstraint(columnNames = { "trans_id"})
 })
 public class PaymentMethod {
 
@@ -24,9 +24,10 @@ public class PaymentMethod {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "stu_id", nullable = false, unique = true)
-    @NonNull
-    private Long studentId;
+
+    @ManyToOne
+    @JoinColumn(name = "stu_id",nullable = false, unique = false)
+    private Student student;
 
 
     @NonNull
@@ -52,7 +53,7 @@ public class PaymentMethod {
 
     public PaymentMethod(PaymentMethodRequest paymentMethodRequest){
 
-        this.studentId = paymentMethodRequest.getStudentId();
+        this.student = paymentMethodRequest.getStudent();
         this.amount = paymentMethodRequest.getAmount();
         this.typeOfMethod = paymentMethodRequest.getTypeOfMethod();
         this.transactionId = paymentMethodRequest.getTransactionId();

@@ -44,7 +44,7 @@ public class AdminService {
     }
 
     @DeleteMapping
-    public void delete(String code) {
+    public void delete(Long code) {
         log.traceEntry("Enter delete", code);
         repo.deleteById(code);
         log.traceExit("Exit delete");

@@ -1,19 +1,16 @@
 package com.group10.se452_g10.payment;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import lombok.NonNull;
+import com.group10.se452_g10.account.Student;
 
 import java.time.LocalDate;
 
 public class PaymentMethodRequest {
 
-    private Long studentId;
+    private Student student;
 
 
-    public PaymentMethodRequest(Long studentId, LocalDate date, Float amount, String typeOfMethod, String transactionId) {
-        this.studentId = studentId;
+    public PaymentMethodRequest(Student student, LocalDate date, Float amount, String typeOfMethod, String transactionId) {
+        this.student = student;
         this.date = date;
         this.amount = amount;
         this.TypeOfMethod = typeOfMethod;
@@ -24,12 +21,12 @@ public class PaymentMethodRequest {
 
     }
 
-    public Long getStudentId() {
-        return studentId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public LocalDate getDate() {

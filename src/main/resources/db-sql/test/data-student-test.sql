@@ -1,0 +1,1 @@
+INSERT INTO students (username, password, email, first_name, last_name, phone_number, address, ssn, dob) VALUES ('johndoe', 'password', 'johndoe@example.com', 'John', 'Doe', 1234567890, '123 Main St', 123456789, '1990-01-01');

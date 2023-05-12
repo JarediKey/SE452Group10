@@ -1,5 +1,6 @@
 package com.group10.se452_g10.payment;
 
+import com.group10.se452_g10.course.Course;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,13 +11,12 @@ import lombok.NonNull;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "payment_record", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"course_id"})
-})
+@Table(name = "payment_record")
+
 public class PaymentRecord {
 
     @Id
-    @Column(name = "course_id",unique = true)
+//    @JoinColumn(name = "course_id",columnDefinition = "VARCHAR(50)")
     private Long courseId;
 
     @NonNull

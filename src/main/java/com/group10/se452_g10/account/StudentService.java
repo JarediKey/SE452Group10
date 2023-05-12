@@ -43,9 +43,9 @@ public class StudentService {
     }
 
     @DeleteMapping
-    public void delete(String code) {
-        log.traceEntry("Enter delete", code);
-        repo.deleteById(code);
+    public void delete(Student stud) {
+        log.traceEntry("Enter delete", stud);
+        repo.delete( stud);
         log.traceExit("Exit delete");
     }
 }
