@@ -25,12 +25,12 @@ public class StudentEnrollmentService {
         return retval;
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public StudentEnrollment save(@RequestBody StudentEnrollment student) {
         log.traceEntry("enter save", student);
-        repo.save(student);
+        var result = repo.save(student);
         log.traceExit("exit save", student);
-        return student;
+        return result;
     }
 
     @PostMapping("/valid")
@@ -42,7 +42,7 @@ public class StudentEnrollmentService {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id ) {
+    public void delete(@PathVariable Long id) {
         log.traceEntry("Enter delete", id);
         repo.deleteById(id);
         log.traceExit("Exit delete");

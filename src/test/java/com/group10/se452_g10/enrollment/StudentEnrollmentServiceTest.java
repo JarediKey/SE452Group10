@@ -51,7 +51,7 @@ class StudentEnrollmentServiceTest {
         studentEnrollmentRepo.deleteAll();
 
         Student student = new Student();
-        student.setEmail("stu_1@depau.edu");
+        student.setEmail("stu_1@depaul.edu");
         Student resStudent = studentRepo.save(student);
 
         Course course = new Course();
@@ -88,7 +88,7 @@ class StudentEnrollmentServiceTest {
 
         // Save the new course into db and verify the status code.
 
-        mockMvc.perform(post("/api/student-enrollment/save")
+        mockMvc.perform(post("/api/student-enrollment")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(student)))
                 .andExpect(status().isOk());
