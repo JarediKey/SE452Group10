@@ -20,6 +20,8 @@ import java.time.LocalDate;
 })
 public class PaymentMethod {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -69,6 +71,7 @@ public class PaymentMethod {
 //        this.transactionId = "sdn";
 //        this.date = LocalDate.now();
 //    }
+
 
 
 }

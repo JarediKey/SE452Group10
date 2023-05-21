@@ -10,13 +10,16 @@
  * 6)Created repositories which extends JPA Repository to access inbuilt methods of database to play around it.
  * 7)Created Rest Controller for API Calls with help of Getmapping, PostMapping etc.,
  * 8)Created unit tests for tables created.
+ * 9)Created services for all the entities.
+ * 10)Implemented Swagger documentation for all the services.
  *
- *    --Data Entity: payment_method, payment_record
+ *    --Data Entity: payment_method, payment_record, card_details
  *
- * 1)Created tables payment_method and payment_record.
+ * 1)Created tables payment_method, card_details and payment_record.
  * 2)payment_method table will maintain the records of all the fee payments along with student_id
  *   and the amount paid and so on. Calculate the fee for students based on the enrollment of courses and more.
  * 3)payment_record table will maintain the records of all the course_id and fees for that particular course.
+ * 4)card_details table will mainatin the payment details of respective student.
  *
  *
  *    --UNIT TESTS:
@@ -42,6 +45,9 @@
  *  5)logs will be rolled on daily basis.
  *  6)Implemented '@TestMethodOrder' annotation to run tests in specific order.
  *  7)Enabled caching for entire application using '@EnableCaching' annotation.
+ *  8)Implemented customized services using different annotations like 'IgnoreJson' etc.,
+ *  9)Added api responses for swagger documentation.
+ *
  *
  *
  *  Note: Above information will be updated, as the project moves on.
@@ -51,3 +57,4 @@
  */
 
 package com.group10.se452_g10.payment;
+

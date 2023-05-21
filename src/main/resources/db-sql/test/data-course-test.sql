@@ -1,9 +1,9 @@
 -- Insert courses --
-INSERT INTO courses (dept, num, name) VALUES ('MATH', '101', 'Introduction to Calculus');
-INSERT INTO courses (dept, num, name) VALUES ('MATH', '201', 'Multivariable Calculus');
-INSERT INTO courses (dept, num, name) VALUES ('CS', '101', 'Introduction to Computer Science');
-INSERT INTO courses (dept, num, name) VALUES ('CS', '201', 'Data Structures and Algorithms');
-INSERT INTO courses (dept, num, name) VALUES ('ENG', '101', 'Introduction to Literature');
+INSERT INTO courses (dept, num, name, academic_year, quarter) VALUES ('MATH', '101', 'Introduction to Calculus', 2023, 'FALL');
+INSERT INTO courses (dept, num, name, academic_year, quarter) VALUES ('MATH', '201', 'Multivariable Calculus', 2023, 'FALL');
+INSERT INTO courses (dept, num, name, academic_year, quarter) VALUES ('CS', '101', 'Introduction to Computer Science', 2023, 'FALL');
+INSERT INTO courses (dept, num, name, academic_year, quarter) VALUES ('CS', '201', 'Data Structures and Algorithms', 2023, 'FALL');
+INSERT INTO courses (dept, num, name, academic_year, quarter) VALUES ('ENG', '101', 'Introduction to Literature', 2023, 'FALL');
 
 -- Insert students --
 INSERT INTO students (username, password, email, first_name, last_name, phone_number, address, ssn, dob, gender, guardian_name, guardian_number) VALUES ('johndoe', 'password', 'johndoe@example.com', 'John', 'Doe', 1234567890, '123 Main St', 123456789, '1990-01-01', 'M', '', 0);

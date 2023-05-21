@@ -52,13 +52,26 @@ public class CourseService {
 
     @GetMapping("/search")
     @Operation(summary = "Search courses by keyword")
-    public List<Course> search(@RequestParam String keyword) {
+    public List<Course> search(@RequestParam String keyword,
+                               @RequestParam(required = false) Integer year,
+                               @RequestParam(required = false) String quarter) {
         log.traceEntry("Enter search", keyword);
 
+        Quarter realQuarter = Quarter.valueOfIgnoreCase(quarter);
         String[] keywords = keyword.split(" ");
         List<Course> courses = Arrays.stream(keywords)
                 .parallel()
-                .flatMap(kw -> repo.search(kw).stream())
+                .flatMap(kw -> {
+                    if (year == null && realQuarter == null) {
+                        return repo.search(kw).stream();
+                    } else if (year == null) {
+                        return repo.search(kw, realQuarter).stream();
+                    } else if (quarter == null) {
+                        return repo.search(kw, year).stream();
+                    } else {
+                        return repo.search(kw, year, realQuarter).stream();
+                    }
+                })
                 .distinct()
                 .collect(Collectors.toList());
 

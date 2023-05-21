@@ -12,15 +12,16 @@ The administrator will have overarching access as a debugger.
 <br>
 * Milestone 1: Define the project and base structure and areas where each member will be working on.<br />
 * Milestone 2: Create project data persistence and some services of each module.
+* MileStone 3: Updated few tables based on requirement, Implemented swagger documentation and created few customizes services
 
 ## Project Members
 
-| Member    | Feature    | Note                                                                                                                                                                                      |
-|-----------|------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Ayyub     | Account    | For all account types which can be logged into this system including Admin, Teacher and Student. Providing service like account CRUD and login.<br />Data Entity: Admin, Teacher, Student |
-| Jared     | Course     | Course and GPA CRUD operation, students/teachers search course and GPA by key word(s).<br />Data Entity: Course, GPA                                                                      |
-| Bhagya    | Enrollment | Students enroll course to learn, teachers enroll course to teach. Also provide operation of dropping classes.<br />Data Entity: TeacherEnrollment, StudentEnrollment                      |
-| Srinivasa | Payment    | Add/remove payment methods, calculate the fee based on the student's enrollment of courses, load payment records.<br />Data Entity: PaymentMethod, PaymentRecord                          |
+| Member    | Feature    | Note                                                                                                                                                                                                        |
+|-----------|------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Ayyub     | Account    | For all account types which can be logged into this system including Admin, Teacher and Student. Providing service like account CRUD and login.<br />Data Entity: Admin, Teacher, Student                   |
+| Jared     | Course     | Course and GPA CRUD operation, students/teachers search course and GPA by key word(s).<br />Data Entity: Course, GPA                                                                                        |
+| Bhagya    | Enrollment | Students enroll course to learn, teachers enroll course to teach. Also provide operation of dropping classes.<br />Data Entity: TeacherEnrollment, StudentEnrollment                                        |
+| Srinivasa | Payment    | Add/remove payment methods, calculate the fee based on the student's enrollment of courses, load payment records and Save student card details.<br />Data Entity: PaymentMethod, PaymentRecord, CardDetails |
 
 <br/>
 
@@ -36,12 +37,16 @@ Will meet using Discord and Zoom. Will meet once a week on tuesday .
 
 ## Meeting Notes
 
-| # | Date      | Note                                                                                   | Participants                    |
-|--|-----------|----------------------------------------------------------------------------------------|---------------------------------|
-| 1 | 4.4.2023  | We decided our project scope and setup env.                                            | Ayyub, Jared, Srinivasa, Bhagya |
-| 2 | 4.8.2023  | We create basic project, and initial key features for each of the members of the team. | Ayyub, Jared, Srinivasa, Bhagya |
-| 3 | 4.15.2023 | Divide project into 4 modules, and reassign work for every team member.                | Ayyub, Jared, Srinivasa, Bhagya |
-| 4 | 4.22.2023 | Code-merge session and discussed foreign key implementation.                | Ayyub, Jared, Srinivasa, Bhagya |
+| #   | Date      | Note                                                                                                                                              | Participants                    |
+|-----|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|
+| 1   | 4.4.2023  | We decided our project scope and setup env.                                                                                                       | Ayyub, Jared, Srinivasa, Bhagya |
+| 2   | 4.8.2023  | We create basic project, and initial key features for each of the members of the team.                                                            | Ayyub, Jared, Srinivasa, Bhagya |
+| 3   | 4.15.2023 | Divide project into 4 modules, and reassign work for every team member.                                                                           | Ayyub, Jared, Srinivasa, Bhagya |
+| 4   | 4.22.2023 | Code-merge session and discussed foreign key implementation.                                                                                      | Ayyub, Jared, Srinivasa, Bhagya |
+ | 5   | 5.08.2023 | We discussed the swagger implementation. We discussed on few database relations.                                                                  | Ayyub, Jared, Srinivasa, Bhagya |
+| 6   | 5.08.2023 | We talked about both group and individual codes and approaches for the project. We discussed the docker image and GitHub workflow implementation.. | Ayyub, Jared, Srinivasa, Bhagya |
+
+
 
 
 <br/>
@@ -55,7 +60,7 @@ Will meet using Discord and Zoom. Will meet once a week on tuesday .
 | 3 | Code                  | Lombok        | Code template code     | We have done too many template code and so don't need to learn that   |
 | 3 | Communication Channel | Zoom          | Discord                |                                                                       |
 | 3 | Configurations        | YML           | Application properties | Liked this approach   |
-| 3 | Database              | H2            | TBD                    | Will look into it as the project moves on.   |
+| 3 | Database              | H2            | Postgres               | Will look into it as the project moves on.   |
 
 ## Appendix
 
@@ -70,3 +75,8 @@ Working code (Milestone 2):
 ![img_2.png](src/main/resources/img/img_2.png)
 
 ![img_3.png](src/main/resources/img/img_3.png)
+
+Working code (Milestone 3):
+
+![image_docker](src/main/resources/img/img_docker.png)
+![image_docker-hub](src/main/resources/img/img_docker-hub.png)

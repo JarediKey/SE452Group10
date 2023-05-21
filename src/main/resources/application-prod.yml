@@ -6,7 +6,9 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:se452prod
+    url: jdbc:postgresql://localhost:5432/se452group10db
+    username: postgres
+    password: password
   jpa:
     generate-ddl: true
     show-sql: true

@@ -1,0 +1,35 @@
+#Be sure to change volumn location
+#start:   docker-compose -f docker-compose.yml up -d
+#stop:    docker-compse -f docker-compose.yml down
+
+version: '1.0'
+services:
+    postgresql:
+      container_name: group10-postgres
+      image: postgres
+      env_file: ./.env
+      volumes:
+          - "$POSTGRES_EXTERNAL_LOC:/var/lib/postgresql/data"
+      restart: always
+      ports:
+          - "$POSTGRES_PORT:$POSTGRES_PORT"
+      environment:
+          POSTGRES_USER: ${SQL_USER}
+          POSTGRES_PASSWORD: ${SQL_PASSWORD}
+          POSTGRES_DB: ${SQL_DB}
+
+    app:
+      depends_on: 
+        - postgresql
+      container_name: group10-app
+      image: wyjared/se452-group10
+      env_file: ./.env
+      ports:
+          - "$SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT"
+      environment:
+        SPRING_APPLICATION_JSON: '{
+            "spring.datasource.url"  : "jdbc:postgresql://postgresql:$POSTGRES_PORT/$SQL_DB",
+            "spring.datasource.username" : "$SQL_USER",
+            "spring.datasource.password" : "$SQL_PASSWORD",
+            "spring.jpa.hibernate.ddl-auto" : "update"
+          }'         

@@ -80,7 +80,7 @@ class CourseServiceTest {
     void testDelete() throws Exception {
         List<Course> beforeList = courseRepository.findAll();
 
-        Course newCourse = courseRepository.save(new Course("DEPT", "007", "DESC"));
+        Course newCourse = courseRepository.save(new Course("DEPT", "007", "DESC", 2023, Quarter.FALL));
 
         mockMvc.perform(delete("/api/courses/delete")
                         .contentType(MediaType.APPLICATION_JSON)
