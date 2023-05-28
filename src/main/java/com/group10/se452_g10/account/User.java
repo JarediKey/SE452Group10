@@ -22,17 +22,13 @@ public abstract class User extends Account {
     protected String address;
     protected long ssn;
     protected Date dob;
-
-    protected long age;
     protected String gender;
 
-
     public User(){
-
     }
-    public User(String firstName, String lastName, long age) {
+
+    public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
     }
 }

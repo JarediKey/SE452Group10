@@ -12,8 +12,8 @@ public interface TeacherRepo extends JpaRepository<Teacher, Long> {
 
 
 
-    @Query("select firstName , lastName , age from teachers where age<= :age")
-    public List<Teacher> findByAgeLessThanEqual(@Param("age") long age);
+//    @Query("select firstName , lastName , age from teachers where age<= :age")
+//    public List<Teacher> findByAgeLessThanEqual(@Param("age") long age);
 
     //@Query("SELECT t from teachers where t.firstName ILIKE %:name%")
     public List<Teacher> findByFirstName(@Param("name")String name);
