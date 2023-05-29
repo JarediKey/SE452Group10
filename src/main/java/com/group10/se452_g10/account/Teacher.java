@@ -12,7 +12,7 @@ public class Teacher extends User {
     public Teacher(){
 
     }
-    public Teacher(String firstName, String lastName, long age) {
-        super(firstName, lastName, age);
+    public Teacher(String firstName, String lastName) {
+        super(firstName, lastName);
     }
 }

@@ -11,29 +11,21 @@ import lombok.EqualsAndHashCode;
 @Entity(name = "students")
 public class Student extends User {
 
-
-
-    protected String guardian_name;
-    protected int guardian_number;
-
-    protected long gpa;
+    protected String guardianName;
+    protected int guardianNumber;
 
     public Student() {
     }
 
-    public Student(String firstName, String lastName, long age) {
-        super(firstName, lastName, age);
+    public Student(String firstName, String lastName) {
+        super(firstName, lastName);
     }
 
-    public void setGuardian_number(int guardian_number) {
-        this.guardian_number = guardian_number;
+    public void setGuardianNumber(int guardianNumber) {
+        this.guardianNumber = guardianNumber;
     }
 
-    public void setGuardian_name(String guardian_name) {
-        this.guardian_name = guardian_name;
-    }
-
-    public void setGpa(long gpa) {
-        this.gpa = gpa;
+    public void setGuardianName(String guardianName) {
+        this.guardianName = guardianName;
     }
 }
