@@ -46,17 +46,17 @@ public class TeacherService {
     }
 
 
-    @RequestMapping(value="/findteacher", method = RequestMethod.GET)
-    @ResponseBody
-    public Optional<Teacher> findTeacher(@RequestParam("Id") long teacherId) {
-        return teacherRepo.findById(teacherId);
-    }
-
-    @RequestMapping(value="/findteacher", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Teacher> findByFirstName(@RequestParam("firstName") String name) {
-        return teacherRepo.findByFirstName(name);
-    }
+//    @RequestMapping(value="/findteacher", method = RequestMethod.GET)
+//    @ResponseBody
+//    public Optional<Teacher> findTeacher(@RequestParam("Id") long teacherId) {
+//        return teacherRepo.findById(teacherId);
+//    }
+//
+//    @RequestMapping(value="/findteacher", method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<Teacher> findByFirstName(@RequestParam("firstName") String name) {
+//        return teacherRepo.findByFirstName(name);
+//    }
 
 
 

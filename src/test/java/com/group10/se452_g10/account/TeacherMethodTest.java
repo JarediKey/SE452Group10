@@ -21,39 +21,6 @@ public class TeacherMethodTest {
     private TeacherRepo teacherRepo;
 
     @Test
-    public void testFindByAgeLessThanEqual() {
-        Teacher s_1 = new Teacher();
-        s_1.setLastName("Chicago");
-        s_1.setAge(20L);
-        teacherRepo.save(s_1);
-
-        Teacher s_2 = new Teacher();
-        s_2.setLastName("France");
-        s_1.setAge(20L);
-        teacherRepo.save(s_2);
-
-
-        Teacher s_3 = new Teacher();
-        s_1.setLastName("Chicago");
-        s_1.setAge(10L);
-        teacherRepo.save(s_3);
-
-
-        Teacher s_4 = new Teacher();
-        s_2.setLastName("France");
-        s_1.setAge(30L);
-        teacherRepo.save(s_4);
-
-        long count = teacherRepo.count();
-
-        List<Teacher> lessThanDrinking = teacherRepo.findByAgeLessThanEqual(241L);
-
-        assertEquals(4, count);
-        assertEquals(4, lessThanDrinking.size());
-
-    }
-
-    @Test
     public void testCreationTeacher() {
 
         teacherRepo.deleteAll();

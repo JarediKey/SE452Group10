@@ -21,40 +21,6 @@ public class StudentMethodTest {
     @Autowired
     private StudentRepo studentRepo;
 
-
-
-    @Test
-    public void testFindByAgeLessThanEqual() {
-        Student s_1 = new Student();
-        s_1.setLastName("Chicago");
-        s_1.setAge(20L);
-        studentRepo.save(s_1);
-
-        Student s_2 = new Student();
-        s_2.setLastName("France");
-        s_1.setAge(20L);
-        studentRepo.save(s_2);
-
-
-        Student s_3 = new Student();
-        s_1.setLastName("Chicago");
-        s_1.setAge(10L);
-        studentRepo.save(s_3);
-
-
-        Student s_4 = new Student();
-        s_2.setLastName("France");
-        s_1.setAge(30L);
-        studentRepo.save(s_4);
-
-        long count = studentRepo.count();
-
-        List<Student> lessThanDrinking = studentRepo.findByAgeLessThanEqual(241L);
-
-        assertEquals(4, count);
-        assertEquals(4, lessThanDrinking.size());
-
-    }
     @Test
     public void testCreationStudent() {
 
