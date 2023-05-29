@@ -1,18 +1,14 @@
 package com.group10.se452_g10.account;
 
 import java.util.List;
+import java.util.Optional;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -22,7 +18,7 @@ import lombok.extern.log4j.Log4j2;
 public class StudentService {
 
     @Autowired
-    private StudentRepo repo;
+    private StudentRepo studentRepo;
 
     @GetMapping
     @Operation(summary = "Returns all the Students in the database")
@@ -30,22 +26,33 @@ public class StudentService {
             content = {@Content(mediaType="application/json", schema=@Schema(implementation= Student.class))})
     public List<Student> list(){
         log.traceEntry("Enter list");
-        var retval = repo.findAll();
+        var retval = studentRepo.findAll();
         log.traceExit("Exit list", retval);
-        return repo.findAll();
+        return studentRepo.findAll();
     }
+
+
+    @RequestMapping(value="/findstudent", method = RequestMethod.GET)
+    @ResponseBody
+    public Optional<Student> findStudent(@RequestParam("Id") long studentId) {
+        return studentRepo.findById(studentId);
+    }
+
 
     @PostMapping
-    public void save(@RequestBody Student stud) {
+    public Student save(@RequestBody Student stud) {
         log.traceEntry("enter save", stud);
-        repo.save(stud);
+        studentRepo.save(stud);
         log.traceExit("exit save", stud);
+        return stud;
     }
 
-    @DeleteMapping
-    public void delete(Student stud) {
-        log.traceEntry("Enter delete", stud);
-        repo.delete( stud);
-        log.traceExit("Exit delete");
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id) {
+        log.traceEntry("delete", id);
+        studentRepo.deleteById(id);
+        log.traceExit("delete", id);
     }
+
+
 }

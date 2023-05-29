@@ -7,4 +7,12 @@ import jakarta.persistence.MappedSuperclass;
 
 @Entity(name = "teachers")
 public class Teacher extends User {
+
+
+    public Teacher(){
+
+    }
+    public Teacher(String firstName, String lastName, long age) {
+        super(firstName, lastName, age);
+    }
 }

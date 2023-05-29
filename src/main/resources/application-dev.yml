@@ -33,6 +33,10 @@ spring:
       platform: h2
       mode: never
 
+  security:
+    user:
+      name: user
+      password: password
 
 
 

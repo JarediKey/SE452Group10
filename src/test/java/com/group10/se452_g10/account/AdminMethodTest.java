@@ -29,14 +29,6 @@ public class AdminMethodTest {
         Admin s1_test = adminRepo.save(s_1);
         long afterCount = adminRepo.count();
         assertEquals(beforeCount + 1, afterCount);
-//
-//
-//
-//        Admin s_2 = new Admin();
-//        s_2.setUsername("k.jone");
-//        Admin s2_test = adminRepo.save(s_2);
-//        assertNotNull(s2_test.getUsername());
-
 
     }
 
@@ -77,10 +69,4 @@ public class AdminMethodTest {
 
     }
 
-    @Test
-    public void testReadAdminRecord() {
-
-
-
-    }
 }

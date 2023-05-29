@@ -6,17 +6,52 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 @ActiveProfiles("test")
-//@Sql({"/data-teacher-test.sql"})
 public class TeacherMethodTest {
 
     @Autowired
     private TeacherRepo teacherRepo;
+
+    @Test
+    public void testFindByAgeLessThanEqual() {
+        Teacher s_1 = new Teacher();
+        s_1.setLastName("Chicago");
+        s_1.setAge(20L);
+        teacherRepo.save(s_1);
+
+        Teacher s_2 = new Teacher();
+        s_2.setLastName("France");
+        s_1.setAge(20L);
+        teacherRepo.save(s_2);
+
+
+        Teacher s_3 = new Teacher();
+        s_1.setLastName("Chicago");
+        s_1.setAge(10L);
+        teacherRepo.save(s_3);
+
+
+        Teacher s_4 = new Teacher();
+        s_2.setLastName("France");
+        s_1.setAge(30L);
+        teacherRepo.save(s_4);
+
+        long count = teacherRepo.count();
+
+        List<Teacher> lessThanDrinking = teacherRepo.findByAgeLessThanEqual(241L);
+
+        assertEquals(4, count);
+        assertEquals(4, lessThanDrinking.size());
+
+    }
 
     @Test
     public void testCreationTeacher() {
@@ -53,7 +88,7 @@ public class TeacherMethodTest {
     }
 
     @Test
-    public void testUpdateStudentRecord(){
+    public void testUpdateTeacherRecord(){
 
         Teacher s_1 = new Teacher();
 
@@ -62,7 +97,11 @@ public class TeacherMethodTest {
         s_1.setLastName("Jose");
         s_1.setGender("M");
 
-        Teacher s1_test = teacherRepo.save(s_1);
+
+        teacherRepo.save(s_1);
+
+        long count_one = teacherRepo.count();
+        assertEquals(1, count_one);
     }
 
     @Test
