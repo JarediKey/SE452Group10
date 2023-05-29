@@ -1,6 +1,8 @@
 package com.group10.se452_g10;
 
-import io.micrometer.common.util.internal.logging.InternalLogger;
+import com.group10.se452_g10.account.UserRoleType;
+import com.group10.se452_g10.security.RegistrationService;
+import com.group10.se452_g10.security.SignupRequest;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,4 +45,15 @@ public class Se452Group10Application {
         };
     }
 
+    @Bean
+    public CommandLineRunner addUser(RegistrationService register) {
+        return (args) -> {
+            var request = new SignupRequest();
+            request.setUsername("admin");
+            request.setPassword("admin");
+            request.setEmail("admin@depaul.edu");
+            request.setRole(UserRoleType.ADMIN);
+            register.registerUser(request);
+        };
+    }
 }

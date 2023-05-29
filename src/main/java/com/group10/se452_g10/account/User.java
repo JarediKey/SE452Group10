@@ -3,17 +3,15 @@ package com.group10.se452_g10.account;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 //Seperating User fields
 @EqualsAndHashCode(callSuper = true)
 @Data
 @MappedSuperclass
+@NoArgsConstructor
 public abstract class User extends Account {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
-    protected String email;
     @Column(name = "first_name")
     protected String firstName;
     @Column(name = "last_name")
@@ -23,9 +21,6 @@ public abstract class User extends Account {
     protected long ssn;
     protected Date dob;
     protected String gender;
-
-    public User(){
-    }
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;
