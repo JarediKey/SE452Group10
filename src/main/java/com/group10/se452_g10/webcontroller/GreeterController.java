@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class GreeterController {
-    @GetMapping("/greeting")
+    @GetMapping("/api/greeting")
     public String greetingForm() {
         return "greeting";
     }
 
-    @GetMapping("/greeting/{name}")
+    @GetMapping("/api/greeting/{name}")
     public String greetingForm(@PathVariable String name, Model model) {
         model.addAttribute("name", name);
         return "greetme";
     }
+
 }
