@@ -1,65 +1,71 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="https://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="utf-8" />-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1" />-->
-<!--    <title>Course</title>-->
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>-->
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="hero">-->
-<!--    <div>-->
-<!--        <p class="title">Student Detail</p>-->
-<!--        <form method="post" th:action="@{/api/students}" th:object="${student}">-->
-<!--            <input class="input" id="id" placeholder="" required th:field="*{id}" type="text" readonly/>-->
-<!--            <input class="input"id="dept" placeholder="Enter Dept" required th:field="*{dept}" type="text"/>-->
-<!--            <input class="input"id="num" placeholder="Enter Num" required th:field="*{num}" type="text"/>-->
-<!--            <input class="input"id="description" placeholder="Description" required th:field="*{description}" type="text"/>-->
-<!--            <div class="field is-grouped">-->
-<!--                <div class="control">-->
-<!--                    <button class="button is-link" th:text="${btnAddOrModifyLabel}"></button>-->
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Course</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+</head>
+<body>
+<div class="hero">
+    <div>
+        <p class="title">Student Detail</p>
+        <form method="post" th:action="@{/api/students}" th:object="${student}">
+            <input class="input" id="id" placeholder="" required th:field="*{id}" type="text" readonly/>
+            <input class="input"id="firstName" placeholder="Enter First Name" required th:field="*{firstName}" type="text"/>
+            <input class="input"id="lastName" placeholder="Enter Last Name" required th:field="*{lastName}" type="text"/>
+            <input class="input"id="gender" placeholder="Enter Gender" required th:field="*{gender}" type="text"/>
+            <input class="input"id="email" placeholder="Enter Email" required th:field="*{email}" type="text"/>
+            <input class="input"id="dob" placeholder="Enter DOB" required th:field="*{dob}" type="text"/>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link" th:text="${btnAddOrModifyLabel}"></button>
 
-<!--                </div>-->
-<!--                <div class="control">-->
-<!--                    <button class="button is-link is-light">Cancel</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </form>-->
-<!--    </div>-->
-<!--    &nbsp;-->
-<!--    &nbsp;-->
-<!--    <p class="title">Course List</p>-->
-<!--    <div th:if="${#lists.isEmpty(courses)}">No course</div>-->
-<!--    <div th:unless="${#lists.isEmpty(courses)}">-->
-<!--        <table class="table is-striped is-bordered">-->
-<!--            <tr>-->
-<!--                <th>Id</th>-->
-<!--                <th>Dept</th>-->
-<!--                <th>Num</th>-->
-<!--                <th>Description</th>-->
-<!--                <th>Edit</th>-->
-<!--                <th>Delete</th>-->
-<!--            </tr>-->
-<!--            <tr th:each="course: ${courses}">-->
-<!--                <td th:text="${course.id}"></td>-->
-<!--                <td th:text="${course.dept}"></td>-->
-<!--                <td th:text="${course.num}"></td>-->
-<!--                <td th:text="${course.description}"></td>-->
-<!--                <td><a th:href="'course/edit/' + ${course.id}"><i class="fas fa-user-edit ml-2"></i></a></td>-->
-<!--                <td><a th:href="'course/delete/' + ${course.id}"><i class="fas fa-user-times ml-2"></i></a></td>-->
-<!--            </tr>-->
-<!--        </table>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<footer class="footer">-->
-<!--    <div class="content has-text-centered">-->
-<!--        <strong>SE452</strong> by-->
-<!--        <a-->
-<!--                href="https://www.cdm.depaul.edu/academics/pages/courseinfo.aspx?Subject=SE&CatalogNbr=452"-->
-<!--        >Yours Truly</a-->
-<!--        >-->
-<!--    </div>-->
-<!--</footer>-->
-<!--</body>-->
-<!--</html>-->
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    &nbsp;
+    &nbsp;
+    <p class="title">Student List</p>
+    <div th:if="${#lists.isEmpty(students)}">No Students</div>
+    <div th:unless="${#lists.isEmpty(students)}">
+        <table class="table is-striped is-bordered">
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>DOB</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="course: ${student}">
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.firstName}"></td>
+                <td th:text="${student.lastName}"></td>
+                <td th:text="${student.gender}"></td>
+                <td th:text="${student.email}"></td>
+                <td th:text="${student.dob}"></td>
+
+                <td><a th:href="'student/edit/' + ${student.id}"><i class="fas fa-user-edit ml-2"></i></a></td>
+                <td><a th:href="'student/delete/' + ${student.id}"><i class="fas fa-user-times ml-2"></i></a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<footer class="footer">
+    <div class="content has-text-centered">
+        <strong>SE452</strong> by
+        <a
+                href="https://www.cdm.depaul.edu/academics/pages/courseinfo.aspx?Subject=SE&CatalogNbr=452"
+        >Yours Truly</a
+        >
+    </div>
+</footer>
+</body>
+</html>
