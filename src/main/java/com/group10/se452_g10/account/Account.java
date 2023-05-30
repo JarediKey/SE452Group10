@@ -21,7 +21,7 @@ public abstract class Account {
 
     @NotBlank
     @Size(max = 20)
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     protected String username;
 
     @NotBlank
@@ -32,6 +32,6 @@ public abstract class Account {
     @NotBlank
     @Size(max = 50)
     @Email
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     protected String email;
 }

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,22 +16,26 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@DataJpaTest
+@SpringBootTest
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@WithMockUser(authorities = {"ADMIN"})
 public class PaymentRecordTest {
 
 
     @Autowired
     private PaymentRecordRepository repository;
 
+    @BeforeEach
+    public void clearTable() {
+        repository.deleteAll();
+    }
 
     @Test
     @Transactional
     public void testCreationPaymentRecord() {
 
         PaymentRecord paymentRecord = new PaymentRecord();
-        paymentRecord.setId(1L);
         paymentRecord.setTerm("2023");
         paymentRecord.setCourseFee(3456F);
         long beforeCount = repository.count();
@@ -57,9 +63,6 @@ public class PaymentRecordTest {
 
     @Test
     public void testDeletePaymentRecord() {
-
-//        courseRepository.deleteAll();
-        repository.deleteAll();
 
         PaymentRecord paymentRecord = new PaymentRecord( );
         paymentRecord.setTerm("2023");
@@ -96,21 +99,15 @@ public class PaymentRecordTest {
     @Test
     public void testReadPaymentRecord() {
 
-        repository.deleteAll();
-
         PaymentRecord paymentRecord = new PaymentRecord( );
         paymentRecord.setTerm("2023");
         paymentRecord.setCourseFee(5678F);
 
-
         PaymentRecord savedPaymentMethod = repository.save(paymentRecord);
-
-
 
         Optional<PaymentRecord> verifiedPayment = repository.findById(paymentRecord.getId());
         assertEquals(savedPaymentMethod.getTerm(), verifiedPayment.get().getTerm());
         assertEquals(savedPaymentMethod.getCourseFee(), verifiedPayment.get().getCourseFee());
-
 
     }
 
@@ -127,15 +124,10 @@ public class PaymentRecordTest {
         PaymentRecord savedCourse = repository.save(paymentRecord);
         Long savedTableId = savedCourse.getId();
 
-
-
-        PaymentRecord paymentRecord1 = new PaymentRecord();
-        paymentRecord.setTerm("2024");
-        paymentRecord1.setId(savedTableId);
-
-        paymentRecord1.setCourseFee(200.0f);
         Float updatedCourseFee = 200.0f;
-        PaymentRecord updatedSave = repository.save(paymentRecord1);
+        paymentRecord.setCourseFee(updatedCourseFee);
+
+        PaymentRecord updatedSave = repository.save(paymentRecord);
         assertNotNull(updatedSave);
         assertEquals(savedTableId, updatedSave.getId());
         assertEquals(updatedCourseFee, updatedSave.getCourseFee());
