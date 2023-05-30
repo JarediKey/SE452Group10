@@ -31,7 +31,7 @@ public abstract class Account {
 
     @NotBlank
     @Size(max = 50)
-    @Email
+    @Email(regexp = ".+[@].+[\\.].+", message = "{email.valid")
     @Column(nullable = false)
     protected String email;
 }
