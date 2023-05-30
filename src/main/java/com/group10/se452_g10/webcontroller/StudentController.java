@@ -2,6 +2,7 @@ package com.group10.se452_g10.webcontroller;
 
 import com.group10.se452_g10.account.Student;
 import com.group10.se452_g10.account.StudentRepo;
+import com.group10.se452_g10.course.Course;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,25 @@ public class StudentController {
         return "student/list";
     }
 
+    @PostMapping
+    public String save(@ModelAttribute Student student, HttpSession session) {
+        if (student.getId() == 0)
+            repo.save(student);
+        else {
+            var editStudent = repo.findById(student.getId()).get();
+            editStudent.setFirstName(student.getFirstName());
+            editStudent.setLastName(student.getLastName());
+            editStudent.setGender(student.getGender());
+            editStudent.setEmail(student.getEmail());
+            editStudent.setDob(student.getDob());
+
+            //editStudent.setDescription(course.getDescription());
+            repo.save(editStudent);
+            session.setAttribute("student", null);
+        }
+        return "redirect:/student";
+    }
+
     @GetMapping("/edit/{firstname}")
     public String get(@PathVariable("firstname") String name, Model model, HttpSession session) {
         session.setAttribute("student", repo.findByFirstName(name));
@@ -39,33 +59,6 @@ public class StudentController {
         return "redirect:/students";
     }
 
-//    @PostMapping
-//    public String save(@ModelAttribute Student course, HttpSession session) {
-//        if (course.getId() == 0)
-//            repo.save(course);
-//        else {
-//            var editCourse = repo.findById(course.getId()).get();
-//            editCourse.setDept(course.getDept());
-//            editCourse.setNum(course.getNum());
-//            editCourse.setDescription(course.getDescription());
-//            repo.save(editCourse);
-//            session.setAttribute("course", null);
-//        }
-//        return "redirect:/course";
-//    }
-
-    //    @PostMapping
-//    public String validatedSave(@ModelAttribute Student course) {
-//        if (course.getId() == 0)
-//            repo.save(course);
-//        else {
-//            var editCourse = repo.findById(course.getId()).get();
-//            editCourse.setDept(course.getDept());
-//            editCourse.setNum(course.getNum());
-//            repo.save(editCourse);
-//        }
-//        return "course/edit";
-//    }
 
 }
 

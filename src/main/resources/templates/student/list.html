@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Course</title>
+    <title>Student</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
 </head>
@@ -42,9 +42,10 @@
                 <th>Gender</th>
                 <th>Email</th>
                 <th>DOB</th>
+                <th>Edit</th>
                 <th>Delete</th>
             </tr>
-            <tr th:each="course: ${student}">
+            <tr th:each="stud: ${student}">
                 <td th:text="${student.id}"></td>
                 <td th:text="${student.firstName}"></td>
                 <td th:text="${student.lastName}"></td>
@@ -62,7 +63,7 @@
     <div class="content has-text-centered">
         <strong>SE452</strong> by
         <a
-                href="https://www.cdm.depaul.edu/academics/pages/courseinfo.aspx?Subject=SE&CatalogNbr=452"
+                href="https://github.com/JarediKey/SE452Group10"
         >Yours Truly</a
         >
     </div>

@@ -8,9 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/teacher")
@@ -29,6 +27,25 @@ public class TeacherController {
             model.addAttribute("btnAddOrModifyLabel", "Modify");
         }
         return "teachers/list";
+    }
+
+    @PostMapping
+    public String save(@ModelAttribute Teacher teacher, HttpSession session) {
+        if (teacher.getId() == 0)
+            repo.save(teacher);
+        else {
+            var editTeacher = repo.findById(teacher.getId()).get();
+            editTeacher.setFirstName(teacher.getFirstName());
+            editTeacher.setLastName(teacher.getLastName());
+            editTeacher.setGender(teacher.getGender());
+            editTeacher.setEmail(teacher.getEmail());
+            editTeacher.setDob(teacher.getDob());
+
+            //editTeacher.setDescription(course.getDescription());
+            repo.save(editTeacher);
+            session.setAttribute("teacher", null);
+        }
+        return "redirect:/teacher";
     }
 
     @GetMapping("/edit/{firstname}")
