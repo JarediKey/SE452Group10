@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admins")
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
@@ -21,7 +21,7 @@ public class AdminController {
 
     @GetMapping
     public String list(Model model, HttpSession session) {
-        model.addAttribute("admin", adminRepo.findAll());
+        model.addAttribute("admins", adminRepo.findAll());
         if (session.getAttribute("admin") == null) {
             model.addAttribute("admin", new Admin());
             model.addAttribute("btnAddOrModifyLabel", "Add");

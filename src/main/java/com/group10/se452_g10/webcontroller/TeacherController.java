@@ -13,22 +13,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/teachers")
+@RequestMapping("/teacher")
 public class TeacherController {
     @Autowired
     private TeacherRepo repo;
 
     @GetMapping
     public String list(Model model, HttpSession session) {
-        model.addAttribute("teacher", repo.findAll());
-        if (session.getAttribute("teacher") == null) {
+        model.addAttribute("teachers", repo.findAll());
+        if (session.getAttribute("teachers") == null) {
             model.addAttribute("teacher", new Teacher());
             model.addAttribute("btnAddOrModifyLabel", "Add");
         } else {
-            model.addAttribute("student", session.getAttribute("teacher"));
+            model.addAttribute("teacher", session.getAttribute("teacher"));
             model.addAttribute("btnAddOrModifyLabel", "Modify");
         }
-        return "student/list";
+        return "teachers/list";
     }
 
     @GetMapping("/edit/{firstname}")

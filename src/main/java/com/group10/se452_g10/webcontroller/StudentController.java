@@ -9,14 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/students")
+@RequestMapping("/student")
 public class StudentController {
     @Autowired
     private StudentRepo repo;
 
     @GetMapping
     public String list(Model model, HttpSession session) {
-        model.addAttribute("student", repo.findAll());
+        model.addAttribute("students", repo.findAll());
         if (session.getAttribute("student") == null) {
             model.addAttribute("student", new Student());
             model.addAttribute("btnAddOrModifyLabel", "Add");
