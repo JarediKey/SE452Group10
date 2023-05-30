@@ -31,6 +31,7 @@ public abstract class Account {
 
     @NotBlank
     @Size(max = 50)
+    @Email
     @Column(nullable = false)
     protected String email;
 }
