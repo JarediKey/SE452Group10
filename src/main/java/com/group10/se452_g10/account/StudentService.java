@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import lombok.extern.log4j.Log4j2;
 @RestController
 @RequestMapping("/api/students")
 @Log4j2
+@Tag(name = "Student", description = "Everything about the Student")
 public class StudentService {
 
     @Autowired
