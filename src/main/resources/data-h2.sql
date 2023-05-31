@@ -1,4 +1,6 @@
 --PAYMENT METHOD :
+INSERT INTO admin (username, password, email, first_name, last_name, phone_number, address, ssn, dob) VALUES ('johndoe', 'password');
+
 INSERT INTO students (id,username, password, email, first_name, last_name, phone_number, address, ssn, dob, gender,  guardian_name, guardian_number) VALUES (1,'johndoe', 'password', 'johndoe@example.com', 'John', 'Doe', 1234567890, '123 Main St', 123456789, '1990-01-01','M','DS',2323);
 --INSERT INTO STUDENTS (id,PASSWORD,USERNAME,ADDRESS,DOB,EMAIL,FIRST_NAME,LAST_NAME,PHONE_NUMBER,SSN)
 --VALUES(123,'123','123',12,'1999-05-15','Ds','ds','ds',123,123);
