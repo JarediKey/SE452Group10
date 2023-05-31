@@ -51,7 +51,7 @@ public class TeacherController {
     @GetMapping("/edit/{firstname}")
     public String get(@PathVariable("firstname") String name, Model model, HttpSession session) {
         session.setAttribute("teacher", repo.findByFirstName(name));
-        return "redirect:/teachers";
+        return "redirect:/teacher";
     }
 
     @GetMapping("/delete/{id}")

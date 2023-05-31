@@ -18,7 +18,7 @@ public class CourseController {
     @GetMapping
     public String list(Model model, HttpSession session) {
         model.addAttribute("courses", repo.findAll());
-        if (session.getAttribute("courses") == null) {
+        if (session.getAttribute("course") == null) {
             model.addAttribute("course", new Course());
             model.addAttribute("btnAddOrModifyLabel", "Add");
         } else {

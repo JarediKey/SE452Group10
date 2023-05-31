@@ -11,7 +11,7 @@
 <div class="hero">
     <div>
         <p class="title">Teacher Detail</p>
-        <form method="post" th:action="@{/api/teachers}" th:object="${teacher}">
+        <form method="post" th:action="@{/teacher}" th:object="${teacher}">
             <input class="input" id="id" placeholder="" required th:field="*{id}" type="text" readonly/>
             <input class="input"id="firstName" placeholder="Enter First Name" required th:field="*{firstName}" type="text"/>
             <input class="input"id="lastName" placeholder="Enter Last Name" required th:field="*{lastName}" type="text"/>

@@ -56,7 +56,7 @@ public class StudentController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id, Model model, HttpSession session) {
         repo.deleteById(id);
-        return "redirect:/students";
+        return "redirect:/student";
     }
 
 
