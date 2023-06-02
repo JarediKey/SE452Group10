@@ -1,18 +1,21 @@
 package com.group10.se452_g10.enrollment;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.google.gson.JsonArray;
+import com.group10.se452_g10.course.Course;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+//import org.hibernate.annotations.Table;
+
 @Data
 @Entity(name = "teacher_enrollments")
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "teacher_enrollments", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"TeacherId", "CourseId", "CourseName"})
+@Table(name = "teacher_enrollments", uniqueConstraints={
+       @UniqueConstraint(columnNames = {"TeacherId", "CourseId", "CourseName"})
 })
 public class TeacherEnrollment {
     @Id
@@ -22,15 +25,21 @@ public class TeacherEnrollment {
     @Column(name = "TeacherId", nullable = false, unique = true)
     private String TeacherId;
 
-    @Column(name = "CourseId", nullable = false, unique = true)
+   @Column(name = "CourseId", nullable = false, unique = true)
     private String CourseId;
 
-    @Column(name = "CourseName", nullable = false, unique = true)
+   @Column(name = "CourseName", nullable = false, unique = true)
     private String CourseName;
 
-    @Column(name = "year", nullable = false, unique = false)
-    private String year;
+    public TeacherEnrollment(String TeacherId, String CourseId, String CourseName) {
+        this.TeacherId = TeacherId;
+        this.CourseId = CourseId;
+        this.CourseName = CourseName;
+    }
 
-    @Column(name = "term", nullable = false, unique = false)
-    private String term;
+   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "CourseId")
+    private List<Course> course = new ArrayList<>();
+
+
 }

@@ -1,6 +1,9 @@
 package com.group10.se452_g10.enrollment;
 import java.util.List;
 
+import com.group10.se452_g10.course.Course;
+import com.group10.se452_g10.course.GPA;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,17 @@ public class StudentEnrollmentService {
         log.traceExit("exit save", student);
         return result;
     }
+
+    @PostMapping("/queryByStudentId")
+    @Operation(summary = "Query and list the courses enrolled by the student.")
+    public List<Course> getAllCoursesByStudentId(String id) {
+        log.traceEntry("enter list");
+        var result = repo.getAllCoursesByStudentId(id);
+        log.traceExit("exit list");
+        return result;
+    }
+
+
 
     @PostMapping("/valid")
     public ResponseEntity<StudentEnrollment> saveValidated(@Valid @RequestBody StudentEnrollment student) {

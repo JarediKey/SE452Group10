@@ -30,4 +30,6 @@ public class Course {
         this.year = year;
         this.quarter = quarter;
     }
+
+
 }
