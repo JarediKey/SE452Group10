@@ -14,9 +14,7 @@ logging:
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"
   level:
-    root: WARN
-    org.springframework: ERROR
-    edu.group10.se452_g10: DEBUG
+    root: ERROR
 
 spring:
   datasource:
