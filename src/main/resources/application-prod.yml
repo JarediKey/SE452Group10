@@ -1,12 +1,26 @@
 environment: production
 
 logging:
+  file:
+    name: logs/se452.log
+    # maximum log file size in bytes, before rotation
+    max-size: 10MB
+    # number of backup files to keep
+    max-history: 7
+    rolling:
+      enabled: true
+      file-name-pattern: se452-%d{yyyy-MM-dd}.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"
   level:
-    root: ERROR
+    root: WARN
+    org.springframework: ERROR
+    edu.group10.se452_g10: DEBUG
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/se452group10db
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: password
   jpa:
