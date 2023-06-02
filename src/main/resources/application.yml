@@ -10,6 +10,7 @@ app:
 spring:
   profiles:
     active: prod
+    include: security-sql, security-register
 
 server:
   tomcat:

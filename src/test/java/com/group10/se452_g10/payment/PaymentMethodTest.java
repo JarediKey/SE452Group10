@@ -4,12 +4,14 @@ package com.group10.se452_g10.payment;
 import com.group10.se452_g10.account.Student;
 import com.group10.se452_g10.account.StudentRepo;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,9 +20,10 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@DataJpaTest
+@SpringBootTest
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@WithMockUser(authorities = {"ADMIN"})
 //@Sql({"/data-h2-test.sql"})
 public class PaymentMethodTest {
 
@@ -30,40 +33,36 @@ public class PaymentMethodTest {
     @Autowired
     private StudentRepo studentRepo;
 
-
-
-
     @BeforeEach
-    public void setup() {
-
+    public void clearTable() {
+        repository.deleteAll();
+        studentRepo.deleteAll();
     }
 
     @AfterEach
-    public void tearDown() {
-
+    public void clearTableAfterEach() {
+        repository.deleteAll();
+        studentRepo.deleteAll();
     }
-
 
     @Test
     @Transactional
     public void testCreationPaymentMethod() {
-        studentRepo.deleteAll();
-        repository.deleteAll();
         long beforeCount = repository.count();
-
 
         PaymentMethod paymentMethod = new PaymentMethod();
         Student s1 = new Student();
+        s1.setUsername("Student1");
+        s1.setPassword("Password1");
+        s1.setEmail("student1@depaul.edu");
         s1.setFirstName("A12");
         s1.setLastName("B34");
 
         studentRepo.save(s1);
         long a = studentRepo.count();
 
-
         List<Student> studentList = studentRepo.findAll();
         Student s= studentList.get(0);
-
 
         paymentMethod.setStudent(s);
         paymentMethod.setDate(LocalDate.now());
@@ -82,11 +81,12 @@ public class PaymentMethodTest {
     @Test
     public void testPaymentMethodCreationWithNullValues() {
         try {
-            studentRepo.deleteAll();
-            repository.deleteAll();
             PaymentMethod paymentMethod = new PaymentMethod();
 
             Student student1 = new Student();
+            student1.setUsername("Student1");
+            student1.setPassword("Password1");
+            student1.setEmail("student1@depaul.edu");
             student1.setFirstName("A12");
             student1.setLastName("B34");
             studentRepo.save(student1);
@@ -109,7 +109,6 @@ public class PaymentMethodTest {
 
             assertEquals(s, e.getMessage());
 
-
         }
     }
 
@@ -117,11 +116,11 @@ public class PaymentMethodTest {
 
     @Test
     public void testReadPaymentMethod(){
-        studentRepo.deleteAll();
-        repository.deleteAll();
-
         PaymentMethod paymentMethod = new PaymentMethod();
         Student s = new Student();
+        s.setUsername("Student1");
+        s.setPassword("Password1");
+        s.setEmail("student1@depaul.edu");
         s.setFirstName("A12");
         s.setLastName("B34");
 
@@ -129,8 +128,6 @@ public class PaymentMethodTest {
 
         List<Student> studentList = studentRepo.findAll();
         Student s3= studentList.get(0);
-
-
 
         paymentMethod.setStudent(s3);
 
@@ -154,8 +151,6 @@ public class PaymentMethodTest {
     public void testUniqueValuesVerification(){
 
         try {
-            studentRepo.deleteAll();
-            repository.deleteAll();
             Student s1 = new Student();
             s1.setId(122L);
             PaymentMethod paymentMethod = new PaymentMethod(null, s1, LocalDate.now(), 8908F, "lk", "dhfjvjhkj987", null);
@@ -172,13 +167,12 @@ public class PaymentMethodTest {
 
     @Test
     public void testUpdatePaymentMethod() {
-        studentRepo.deleteAll();
-        repository.deleteAll();
         PaymentMethod paymentMethod = new PaymentMethod();
 
-
-
         Student s1 = new Student();
+        s1.setUsername("Student1");
+        s1.setPassword("Password1");
+        s1.setEmail("student1@depaul.edu");
         s1.setFirstName("A12");
         s1.setLastName("B34");
 
@@ -219,7 +213,6 @@ public class PaymentMethodTest {
         assertEquals(updatedPaymentMethod.getTypeOfMethod(), updatedPaymentMethodResult.getTypeOfMethod());
         assertEquals(updatedPaymentMethod.getTransactionId(), updatedPaymentMethodResult.getTransactionId());
         assertEquals(updatedPaymentMethod.getRemarks(), updatedPaymentMethodResult.getRemarks());
-
 
     }
 

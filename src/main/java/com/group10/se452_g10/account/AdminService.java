@@ -22,7 +22,7 @@ import lombok.extern.log4j.Log4j2;
 public class AdminService {
 
     @Autowired
-    private AdminRepo repo;
+    private AdminRepo adminRepo;
 
 
     @GetMapping
@@ -31,22 +31,22 @@ public class AdminService {
             content = {@Content(mediaType="application/json", schema=@Schema(implementation= Admin.class))})
     public List<Admin> list(){
         log.traceEntry("Enter list");
-        var retval = repo.findAll();
+        var retval = adminRepo.findAll();
         log.traceExit("Exit list", retval);
-        return repo.findAll();
+        return adminRepo.findAll();
     }
 
     @PostMapping
     public void save(@RequestBody Admin admin) {
         log.traceEntry("enter save", admin);
-        repo.save(admin);
+        adminRepo.save(admin);
         log.traceExit("exit save", admin);
     }
 
     @DeleteMapping
     public void delete(Long code) {
         log.traceEntry("Enter delete", code);
-        repo.deleteById(code);
+        adminRepo.deleteById(code);
         log.traceExit("Exit delete");
     }
 

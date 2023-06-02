@@ -3,11 +3,12 @@ package com.group10.se452_g10.payment;
 
 import com.group10.se452_g10.account.Student;
 import com.group10.se452_g10.account.StudentRepo;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
@@ -16,9 +17,10 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DataJpaTest
+@SpringBootTest
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@WithMockUser(authorities = {"ADMIN"})
 public class CardDetailsTest {
 
 
@@ -28,17 +30,29 @@ public class CardDetailsTest {
     @Autowired
     private StudentRepo studentRepo;
 
+    @BeforeEach
+    @Transactional
+    public void clearTable() {
+        cardDetailsRepo.deleteAll();
+        studentRepo.deleteAll();
+    }
+
+    @AfterEach
+    public void clearTableAfterEach() {
+        cardDetailsRepo.deleteAll();
+        studentRepo.deleteAll();
+    }
+
     @Test
     public void testCreationCardDetails() {
-
-        studentRepo.deleteAll();
-        cardDetailsRepo.deleteAll();
         long beforeCount = cardDetailsRepo.count();
 
         Student s1 = new Student();
-        s1.setId(1224L);
         s1.setFirstName("A12");
         s1.setLastName("B34");
+        s1.setUsername("Student1");
+        s1.setPassword("Password1");
+        s1.setEmail("student1@depaul.edu");
         studentRepo.save(s1);
         List<Student> studentList = studentRepo.findAll();
         Student student= studentList.get(0);
@@ -60,13 +74,7 @@ public class CardDetailsTest {
     @Test
     public void testPaymentMethodCreationWithStudentNull() {
         try {
-            studentRepo.deleteAll();
-            cardDetailsRepo.deleteAll();
-
-
-
             CardDetails cardDetails = new CardDetails();
-
 
             cardDetails.setStudent(null);
             cardDetails.setExpMonth("12");
@@ -74,7 +82,6 @@ public class CardDetailsTest {
             cardDetails.setNumber("123456242343");
             cardDetails.setType("Rupay");
             cardDetailsRepo.save(cardDetails);
-
 
         } catch (Exception e) {
             // expected exception was thrown, test passed..studentId is marked
@@ -87,11 +94,10 @@ public class CardDetailsTest {
     @Test
     public void testPaymentMethodCreationWithNullValues() {
         try {
-            studentRepo.deleteAll();
-            cardDetailsRepo.deleteAll();
-
             Student s1 = new Student();
-            s1.setId(1224L);
+            s1.setUsername("Student1");
+            s1.setPassword("Password1");
+            s1.setEmail("student1@depaul.edu");
             s1.setFirstName("A12");
             s1.setLastName("B34");
             studentRepo.save(s1);
@@ -100,15 +106,12 @@ public class CardDetailsTest {
 
             CardDetails cardDetails = new CardDetails();
 
-
             cardDetails.setStudent(student);
             cardDetails.setExpMonth(null);
             cardDetails.setExpYear("2026");
             cardDetails.setNumber("123456242343");
             cardDetails.setType("Rupay");
             cardDetailsRepo.save(cardDetails);
-
-
         } catch (Exception e) {
             // expected exception was thrown, test passed..studentId is marked
             String s = "expMonth is marked non-null but is null";
@@ -120,13 +123,12 @@ public class CardDetailsTest {
 
     @Test
     public void testDeleteCardDetails(){
-
-        studentRepo.deleteAll();
-        cardDetailsRepo.deleteAll();
         long beforeCount = cardDetailsRepo.count();
 
         Student s1 = new Student();
-        s1.setId(1224L);
+        s1.setUsername("Student1");
+        s1.setPassword("Password1");
+        s1.setEmail("student1@depaul.edu");
         s1.setFirstName("A12");
         s1.setLastName("B34");
         studentRepo.save(s1);
@@ -154,13 +156,12 @@ public class CardDetailsTest {
 
     @Test
     public void testReadCardDetails(){
-
-        studentRepo.deleteAll();
-        cardDetailsRepo.deleteAll();
         long beforeCount = cardDetailsRepo.count();
 
         Student s1 = new Student();
-        s1.setId(1224L);
+        s1.setUsername("Student1");
+        s1.setPassword("Password1");
+        s1.setEmail("student1@depaul.edu");
         s1.setFirstName("A12");
         s1.setLastName("B34");
         studentRepo.save(s1);
@@ -226,13 +227,12 @@ public class CardDetailsTest {
 
     @Test
     public void testUpdateCardDetails(){
-
-        studentRepo.deleteAll();
-        cardDetailsRepo.deleteAll();
         long beforeCount = cardDetailsRepo.count();
 
         Student s1 = new Student();
-        s1.setId(1224L);
+        s1.setUsername("Student1");
+        s1.setPassword("Password1");
+        s1.setEmail("student1@depaul.edu");
         s1.setFirstName("A12");
         s1.setLastName("B34");
         studentRepo.save(s1);

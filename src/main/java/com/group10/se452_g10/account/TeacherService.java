@@ -1,6 +1,7 @@
 package com.group10.se452_g10.account;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.group10.se452_g10.course.Course;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,12 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.extern.log4j.Log4j2;
 @RestController
@@ -21,39 +17,49 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class TeacherService {
 
-
-
     @Autowired
-    private TeacherRepo repo;
-
+    private TeacherRepo teacherRepo;
 
     @GetMapping
-    @Operation(summary = "Returns all the Teachers in the database")
+    @Operation(summary = "Returns all the Students in the database")
     @ApiResponse(responseCode = "200", description = "valid response",
             content = {@Content(mediaType="application/json", schema=@Schema(implementation= Teacher.class))})
     public List<Teacher> list(){
         log.traceEntry("Enter list");
-        var retval = repo.findAll();
+        var retval = teacherRepo.findAll();
         log.traceExit("Exit list", retval);
-        return repo.findAll();
+        return teacherRepo.findAll();
     }
 
-    @PostMapping("/save")
-    @Operation(summary = "Save the Course and returns the Teacher First name")
-    public String save(@RequestBody Teacher teach) {
-        log.traceEntry("enter save", teach);
-        repo.save(teach);
-        log.traceExit("exit save", teach);
-        return teach.getFirstName();
+    @PostMapping
+    public void save(@RequestBody Teacher stud) {
+        log.traceEntry("enter save", stud);
+        teacherRepo.save(stud);
+        log.traceExit("exit save", stud);
     }
 
     @DeleteMapping
-    @Operation(summary = "Delete the teacher")
-    public void delete(Long id) {
-        log.traceEntry("Enter delete", id);
-        repo.deleteById(id);
+    public void delete(Teacher stud) {
+        log.traceEntry("Enter delete", stud);
+        teacherRepo.delete( stud);
         log.traceExit("Exit delete");
     }
+
+
+//    @RequestMapping(value="/findteacher", method = RequestMethod.GET)
+//    @ResponseBody
+//    public Optional<Teacher> findTeacher(@RequestParam("Id") long teacherId) {
+//        return teacherRepo.findById(teacherId);
+//    }
+//
+//    @RequestMapping(value="/findteacher", method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<Teacher> findByFirstName(@RequestParam("firstName") String name) {
+//        return teacherRepo.findByFirstName(name);
+//    }
+
+
+
 
 
 
