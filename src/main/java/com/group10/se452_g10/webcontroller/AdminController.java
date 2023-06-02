@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
     private AdminRepo adminRepo;
+
+
 
     @GetMapping
     public String list(Model model, HttpSession session) {
