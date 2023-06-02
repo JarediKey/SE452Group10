@@ -2,8 +2,10 @@ package com.group10.se452_g10;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class Se452Group10ApplicationTests {
 
     @Test
