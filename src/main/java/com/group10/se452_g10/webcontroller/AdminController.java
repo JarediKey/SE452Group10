@@ -1,9 +1,7 @@
 package com.group10.se452_g10.webcontroller;
 
 
-import com.group10.se452_g10.account.Admin;
-import com.group10.se452_g10.account.AdminRepo;
-import com.group10.se452_g10.account.Student;
+import com.group10.se452_g10.account.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +17,29 @@ public class AdminController {
     @Autowired
     private AdminRepo adminRepo;
 
+    @Autowired
+    private StudentRepo studentRepo;
+
+    @Autowired
+    private TeacherRepo teacherRepo;
     @GetMapping
     public String list(Model model, HttpSession session) {
         model.addAttribute("admins", adminRepo.findAll());
         if (session.getAttribute("admin") == null) {
             model.addAttribute("admin", new Admin());
+            model.addAttribute("btnAddOrModifyLabel", "Add");
+        } else {
+            model.addAttribute("admin", session.getAttribute("admin"));
+            model.addAttribute("btnAddOrModifyLabel", "Modify");
+        }
+        return "admins/list";
+    }
+
+    @GetMapping
+    public String CreateStudent(Model model, HttpSession session) {
+        model.addAttribute("students", studentRepo.findAll());
+        if (session.getAttribute("student") == null) {
+            model.addAttribute("student", new Student());
             model.addAttribute("btnAddOrModifyLabel", "Add");
         } else {
             model.addAttribute("admin", session.getAttribute("admin"));
