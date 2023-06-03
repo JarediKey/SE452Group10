@@ -48,12 +48,26 @@ public class Se452Group10Application {
     @Bean
     public CommandLineRunner addUser(RegistrationService register) {
         return (args) -> {
-            var request = new SignupRequest();
-            request.setUsername("admin");
-            request.setPassword("admin");
-            request.setEmail("admin@depaul.edu");
-            request.setRole(UserRoleType.ADMIN);
-            register.registerUser(request);
+            var adminRequest = new SignupRequest();
+            adminRequest.setUsername("admin");
+            adminRequest.setPassword("admin");
+            adminRequest.setEmail("admin@depaul.edu");
+            adminRequest.setRole(UserRoleType.ADMIN);
+            register.registerUser(adminRequest);
+
+            var teacherRequest = new SignupRequest();
+            teacherRequest.setUsername("teacher");
+            teacherRequest.setPassword("teacher");
+            teacherRequest.setEmail("teacher@depaul.edu");
+            teacherRequest.setRole(UserRoleType.TEACHER);
+            register.registerUser(teacherRequest);
+
+            var studentRequest = new SignupRequest();
+            studentRequest.setUsername("student");
+            studentRequest.setPassword("student");
+            studentRequest.setEmail("student@depaul.edu");
+            studentRequest.setRole(UserRoleType.STUDENT);
+            register.registerUser(studentRequest);
         };
     }
 }
