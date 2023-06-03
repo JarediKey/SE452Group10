@@ -1,23 +1,56 @@
-//package com.group10.se452_g10.webcontroller;
+package com.group10.se452_g10.webcontroller;
+
+import com.group10.se452_g10.account.Student;
+import com.group10.se452_g10.account.StudentRepo;
+import com.group10.se452_g10.account.StudentService;
+import com.group10.se452_g10.course.CourseRepository;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@Controller
+@RequestMapping("/student")
+public class StudentController {
+    @Autowired
+    private StudentRepo studentRepo;
+    @Autowired
+    private CourseRepository courseRepository;
+    @Autowired
+    private StudentService studentService;
+
+
+
+    @GetMapping("Studentshow")
+    public String STHome(@PathVariable("id") long id, Model model){
+        Optional<Student> student =studentService.findStudent(id);
+        model.addAttribute("student",  student);
+        return "Studentshow";
+
+    }
+
+
+//    @PostMapping("addStudent")
+//    public String addStudent(@ModelAttribute Student student, Model model, HttpSession session){
+////        System.out.println("type added");
+////        StudentSer.addStudent(Student);
 //
-//import com.group10.se452_g10.account.Student;
-//import com.group10.se452_g10.account.StudentRepo;
-//import com.group10.se452_g10.course.CourseRepository;
-//import jakarta.servlet.http.HttpSession;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.*;
+//        Parents temp = parentsSer.addParents(parent);
 //
-//@Controller
-//@RequestMapping("/student")
-//public class StudentController {
-//    @Autowired
-//    private StudentRepo studentRepo;
-//    @Autowired
-//    private CourseRepository courseRepository;
+//        student.setParents(temp);
 //
+//        studentSer.addStudent(student);
 //
+//        model.addAttribute("newParent", new Parents());
+//        model.addAttribute("newStudent", new Student());
+//        session.setAttribute("msg","Student Added Sucessfully...");
+//        return "StudentAdd";
+//    }
+
 //    @GetMapping()
 //    public String createStudentForm(Model model) {
 //
@@ -69,7 +102,7 @@
 //        return "redirect:/students";
 //    }
 //
-//
-//}
-//
-//
+
+}
+
+
