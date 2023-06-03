@@ -29,6 +29,16 @@ public class TeacherController {
         return "teachers/list";
     }
 
+    @GetMapping("/teachers/new")
+    public String createTeacherForm(Model model) {
+
+        //create student object to hold student from data
+        Teacher teacher = new Teacher();
+        model.addAttribute("student", teacher);
+        return "teachers/create_teacher";
+
+    }
+
     @PostMapping
     public String save(@ModelAttribute Teacher teacher, HttpSession session) {
         if (teacher.getId() == 0)
