@@ -1,7 +1,10 @@
 package com.group10.se452_g10.webcontroller;
 
+import com.group10.se452_g10.account.*;
 import com.group10.se452_g10.course.Course;
 import com.group10.se452_g10.course.CourseRepository;
+import com.group10.se452_g10.enrollment.StudentEnrollmentRepository;
+import com.group10.se452_g10.enrollment.TeacherEnrollmentRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,11 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class CourseController {
 
     @Autowired
-    private CourseRepository repo;
+    private CourseRepository courseRepository;
 
     @GetMapping("/list")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String list(Model model, HttpSession session) {
-        model.addAttribute("courses", repo.findAll());
+        model.addAttribute("courses", courseRepository.findAll());
         if (session.getAttribute("course") == null) {
             model.addAttribute("course", new Course());
             model.addAttribute("btnAddOrModifyLabel", "Add");
@@ -40,14 +44,14 @@ public class CourseController {
     @PostMapping("/new")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String createCourse(@ModelAttribute("course") Course course) {
-        repo.save(course);
+        courseRepository.save(course);
         return "redirect:/course/list";
     }
 
     @GetMapping("/edit/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String get(@PathVariable("id") Long id, Model model, HttpSession session) {
-        Course course = repo.findById(id).get();
+        Course course = courseRepository.findById(id).get();
         model.addAttribute("course", course);
         return "course/edit_course";
     }
@@ -56,25 +60,25 @@ public class CourseController {
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String editCourse(@PathVariable("id") Long id, @ModelAttribute("course") Course course) {
         course.setId(id);
-        repo.save(course);
+        courseRepository.save(course);
         return "redirect:/course/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id, Model model, HttpSession session) {
-        repo.deleteById(id);
+        courseRepository.deleteById(id);
         return "redirect:/course/list";
     }
 
     //    @PostMapping
     public String validatedSave(@ModelAttribute Course course) {
         if (course.getId() == 0)
-            repo.save(course);
+            courseRepository.save(course);
         else {
-            var editCourse = repo.findById(course.getId()).get();
+            var editCourse = courseRepository.findById(course.getId()).get();
             editCourse.setDept(course.getDept());
             editCourse.setNum(course.getNum());
-            repo.save(editCourse);
+            courseRepository.save(editCourse);
         }
         return "course/edit";
     }
