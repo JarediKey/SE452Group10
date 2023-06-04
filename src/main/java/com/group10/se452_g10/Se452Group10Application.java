@@ -54,20 +54,6 @@ public class Se452Group10Application {
             adminRequest.setEmail("admin@depaul.edu");
             adminRequest.setRole(UserRoleType.ADMIN);
             register.registerUser(adminRequest);
-
-            var teacherRequest = new SignupRequest();
-            teacherRequest.setUsername("teacher");
-            teacherRequest.setPassword("teacher");
-            teacherRequest.setEmail("teacher@depaul.edu");
-            teacherRequest.setRole(UserRoleType.TEACHER);
-            register.registerUser(teacherRequest);
-
-            var studentRequest = new SignupRequest();
-            studentRequest.setUsername("student");
-            studentRequest.setPassword("student");
-            studentRequest.setEmail("student@depaul.edu");
-            studentRequest.setRole(UserRoleType.STUDENT);
-            register.registerUser(studentRequest);
         };
     }
 }
