@@ -48,26 +48,26 @@ public class Se452Group10Application {
     @Bean
     public CommandLineRunner addUser(RegistrationService register) {
         return (args) -> {
-            var request = new SignupRequest();
-            request.setUsername("admin");
-            request.setPassword("admin");
-            request.setEmail("admin@depaul.edu");
-            request.setRole(UserRoleType.ADMIN);
-            register.registerUser(request);
+            var adminRequest = new SignupRequest();
+            adminRequest.setUsername("admin");
+            adminRequest.setPassword("admin");
+            adminRequest.setEmail("admin@depaul.edu");
+            adminRequest.setRole(UserRoleType.ADMIN);
+            register.registerUser(adminRequest);
 
-            var request1 = new SignupRequest();
-            request1.setUsername("tea");
-            request1.setPassword("admin");
-            request1.setEmail("admin@depaul.edu");
-            request1.setRole(UserRoleType.TEACHER);
-            register.registerUser(request1);
+            var teacherRequest = new SignupRequest();
+            teacherRequest.setUsername("teacher");
+            teacherRequest.setPassword("teacher");
+            teacherRequest.setEmail("teacher@depaul.edu");
+            teacherRequest.setRole(UserRoleType.TEACHER);
+            register.registerUser(teacherRequest);
 
-            var request3 = new SignupRequest();
-            request3.setUsername("student");
-            request3.setPassword("student");
-            request3.setEmail("admin@depaul.edu");
-            request3.setRole(UserRoleType.STUDENT);
-            register.registerUser(request3);
+            var studentRequest = new SignupRequest();
+            studentRequest.setUsername("student");
+            studentRequest.setPassword("student");
+            studentRequest.setEmail("student@depaul.edu");
+            studentRequest.setRole(UserRoleType.STUDENT);
+            register.registerUser(studentRequest);
         };
     }
 }
