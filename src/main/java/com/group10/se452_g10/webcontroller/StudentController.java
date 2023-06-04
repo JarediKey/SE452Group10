@@ -6,6 +6,7 @@ import com.group10.se452_g10.account.StudentService;
 import com.group10.se452_g10.course.Course;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,8 @@ public class StudentController {
         return "student/list";
     }
 
-    @GetMapping("/students/new")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/admin/new")
     public String createStudentForm(Model model) {
 
         //create student object to hold student from data
