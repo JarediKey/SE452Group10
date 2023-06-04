@@ -15,7 +15,7 @@ public class CourseController {
     @Autowired
     private CourseRepository repo;
 
-    @GetMapping
+    @GetMapping("/list")
     public String list(Model model, HttpSession session) {
         model.addAttribute("courses", repo.findAll());
         if (session.getAttribute("course") == null) {

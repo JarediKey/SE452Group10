@@ -19,7 +19,8 @@ public class StudentController {
 
     private StudentService studentService;
 
-    @GetMapping
+    @GetMapping("/list")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String list(Model model, HttpSession session) {
         model.addAttribute("students", studentRepo.findAll());
         if (session.getAttribute("student") == null) {
@@ -32,8 +33,8 @@ public class StudentController {
         return "student/list";
     }
 
+    @GetMapping("/new_student")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    @GetMapping("/admin/new")
     public String createStudentForm(Model model) {
 
         //create student object to hold student from data
@@ -85,6 +86,7 @@ public class StudentController {
 //        return "redirect:/students";
 //    }
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String delete(@PathVariable("id") Long id, Model model, HttpSession session) {
         studentRepo.deleteById(id);
         return "redirect:/student";

@@ -1,11 +1,10 @@
 package com.group10.se452_g10.webcontroller;
 
-import com.group10.se452_g10.account.Student;
-import com.group10.se452_g10.account.StudentRepo;
 import com.group10.se452_g10.account.Teacher;
 import com.group10.se452_g10.account.TeacherRepo;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,8 @@ public class TeacherController {
     @Autowired
     private TeacherRepo repo;
 
-    @GetMapping
+    @GetMapping("list")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String list(Model model, HttpSession session) {
         model.addAttribute("teachers", repo.findAll());
         if (session.getAttribute("teachers") == null) {
@@ -29,7 +29,8 @@ public class TeacherController {
         return "teachers/list";
     }
 
-    @GetMapping("/teachers/new")
+    @GetMapping("/new_teacher")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String createTeacherForm(Model model) {
 
         //create student object to hold student from data
@@ -65,6 +66,7 @@ public class TeacherController {
     }
 
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String delete(@PathVariable("id") Long id, Model model, HttpSession session) {
         repo.deleteById(id);
         return "redirect:/teacher";

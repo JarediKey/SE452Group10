@@ -4,6 +4,7 @@ package com.group10.se452_g10.webcontroller;
 import com.group10.se452_g10.account.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasAnyAuthority('ADMIN')")
 public class AdminController {
 
     @Autowired
@@ -22,7 +24,8 @@ public class AdminController {
 
     @Autowired
     private TeacherRepo teacherRepo;
-    @GetMapping
+
+    @GetMapping("/list")
     public String list(Model model, HttpSession session) {
         model.addAttribute("admins", adminRepo.findAll());
         if (session.getAttribute("admin") == null) {
@@ -32,11 +35,11 @@ public class AdminController {
             model.addAttribute("admin", session.getAttribute("admin"));
             model.addAttribute("btnAddOrModifyLabel", "Modify");
         }
-        return "admins/list";
+        return "admin/list";
     }
 
-    @GetMapping
-    public String CreateStudent(Model model, HttpSession session) {
+    @GetMapping("/create_student")
+    public String createStudent(Model model, HttpSession session) {
         model.addAttribute("students", studentRepo.findAll());
         if (session.getAttribute("student") == null) {
             model.addAttribute("student", new Student());
@@ -45,13 +48,13 @@ public class AdminController {
             model.addAttribute("admin", session.getAttribute("admin"));
             model.addAttribute("btnAddOrModifyLabel", "Modify");
         }
-        return "admins/list";
+        return "admin/list";
     }
 
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id, Model model, HttpSession session) {
         adminRepo.deleteById(id);
-        return "redirect:/admins";
+        return "redirect:/admin";
     }
 }
