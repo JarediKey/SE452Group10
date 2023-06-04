@@ -1,6 +1,5 @@
 package com.group10.se452_g10.security;
 
-import com.group10.se452_g10.account.UserRoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +11,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
 @Configuration
@@ -41,6 +41,11 @@ public class WebSecurityConfig {
 	}
 
 	@Bean
+	public AuthenticationSuccessHandler loginAuthenticationSuccessHandler(){
+		return new LoginAuthenticationSuccessHandler();
+	}
+
+	@Bean
 	BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
@@ -49,9 +54,10 @@ public class WebSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable()
 				.authorizeHttpRequests()
-				.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-				.requestMatchers("/**").hasAnyAuthority(UserRoleType.ADMIN.name())
-				.and().formLogin();
+				.requestMatchers("/**").permitAll()
+				.and()
+				.formLogin().loginPage("/login").successHandler(loginAuthenticationSuccessHandler())
+		;
 
 		// fix H2 database console: Refused to display ' in a frame because it set
 		// 'X-Frame-Options' to 'deny'
