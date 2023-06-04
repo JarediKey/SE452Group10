@@ -11,11 +11,11 @@
 <div class="hero">
     <div>
         <p class="title">Course Detail</p>
-        <form method="post" th:action="@{/api/courses}" th:object="${course}">
+        <form method="post" th:action="@{/course}" th:object="${course}">
             <input class="input" id="id" placeholder="" required th:field="*{id}" type="text" readonly/>
             <input class="input"id="dept" placeholder="Enter Dept" required th:field="*{dept}" type="text"/>
             <input class="input"id="num" placeholder="Enter Num" required th:field="*{num}" type="text"/>
-            <input class="input"id="description" placeholder="Description" required th:field="*{description}" type="text"/>
+<!--            //<input class="input"id="description" placeholder="Description" required th:field="*{description}" type="text"/>-->
             <div class="field is-grouped">
                 <div class="control">
                     <button class="button is-link" th:text="${btnAddOrModifyLabel}"></button>
@@ -37,7 +37,6 @@
                 <th>Id</th>
                 <th>Dept</th>
                 <th>Num</th>
-                <th>Description</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -45,7 +44,6 @@
                 <td th:text="${course.id}"></td>
                 <td th:text="${course.dept}"></td>
                 <td th:text="${course.num}"></td>
-                <td th:text="${course.description}"></td>
                 <td><a th:href="'course/edit/' + ${course.id}"><i class="fas fa-user-edit ml-2"></i></a></td>
                 <td><a th:href="'course/delete/' + ${course.id}"><i class="fas fa-user-times ml-2"></i></a></td>
             </tr>

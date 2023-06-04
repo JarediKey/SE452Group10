@@ -1,11 +1,10 @@
 package com.group10.se452_g10.webcontroller;
 
-import com.group10.se452_g10.account.Student;
-import com.group10.se452_g10.account.StudentRepo;
 import com.group10.se452_g10.account.Teacher;
 import com.group10.se452_g10.account.TeacherRepo;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,8 @@ public class TeacherController {
     @Autowired
     private TeacherRepo repo;
 
-    @GetMapping
+    @GetMapping("list")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String list(Model model, HttpSession session) {
         model.addAttribute("teachers", repo.findAll());
         if (session.getAttribute("teachers") == null) {
@@ -27,6 +27,17 @@ public class TeacherController {
             model.addAttribute("btnAddOrModifyLabel", "Modify");
         }
         return "teachers/list";
+    }
+
+    @GetMapping("/new_teacher")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    public String createTeacherForm(Model model) {
+
+        //create student object to hold student from data
+        Teacher teacher = new Teacher();
+        model.addAttribute("student", teacher);
+        return "teachers/create_teacher";
+
     }
 
     @PostMapping
@@ -51,10 +62,11 @@ public class TeacherController {
     @GetMapping("/edit/{firstname}")
     public String get(@PathVariable("firstname") String name, Model model, HttpSession session) {
         session.setAttribute("teacher", repo.findByFirstName(name));
-        return "redirect:/teachers";
+        return "redirect:/teacher";
     }
 
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String delete(@PathVariable("id") Long id, Model model, HttpSession session) {
         repo.deleteById(id);
         return "redirect:/teacher";

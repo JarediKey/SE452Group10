@@ -27,9 +27,9 @@ public class StudentService {
     @ApiResponse(responseCode = "200", description = "valid response",
             content = {@Content(mediaType="application/json", schema=@Schema(implementation= Student.class))})
     public List<Student> list(){
-        log.traceEntry("Enter list");
+//        log.traceEntry("Enter list");
         var retval = studentRepo.findAll();
-        log.traceExit("Exit list", retval);
+//        log.traceExit("Exit list", retval);
         return studentRepo.findAll();
     }
 
