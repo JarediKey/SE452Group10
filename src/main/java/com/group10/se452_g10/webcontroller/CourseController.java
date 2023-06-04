@@ -3,6 +3,7 @@ package com.group10.se452_g10.webcontroller;
 import com.group10.se452_g10.account.*;
 import com.group10.se452_g10.course.Course;
 import com.group10.se452_g10.course.CourseRepository;
+import com.group10.se452_g10.course.CourseSearch;
 import com.group10.se452_g10.enrollment.StudentEnrollmentRepository;
 import com.group10.se452_g10.enrollment.TeacherEnrollmentRepository;
 import jakarta.servlet.http.HttpSession;
@@ -11,6 +12,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/course")
@@ -83,4 +86,21 @@ public class CourseController {
         return "course/edit";
     }
 
+    @GetMapping("/search")
+    @PreAuthorize("hasAnyAuthority('TEACHER', 'STUDENT')")
+    public String showSearchPage(Model model) {
+        CourseSearch courseSearch = new CourseSearch();
+        model.addAttribute("courseSearch", courseSearch);
+        return "course/search_page";
+    }
+
+    @PostMapping("/search_result")
+    @PreAuthorize("hasAnyAuthority('TEACHER', 'STUDENT')")
+    public String searchCourses(@ModelAttribute("courseSearch") CourseSearch courseSearch, Model model) {
+        List<Course> searchResults = courseRepository.search(courseSearch.getKeyword());
+
+        model.addAttribute("courses", searchResults);
+
+        return "course/search_result";
+    }
 }
