@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("card_details")
+@RequestMapping("/api/card_details")
 @Tag(name = "CardDetails",description = "Everything about cards")
 @Log4j2
 public class CardDetailsController {

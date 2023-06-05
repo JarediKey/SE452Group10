@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Student Management</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+<!-- Brand -->
+<a class="navbar-brand" href="#">Student Management</a>
+
+<!-- Toggler/collapsibe Button -->
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<!-- Navbar links -->
+<div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/teacher/list}">Teacher Management</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/course/list}">Course Management</a>
+        </li>
+    </ul>
+</div>
+</nav>
+<br>
+<br>
+
+<div sec:authorize="hasAuthority('A')">
+    <!-- Content visible only for users with ROLE_ADMIN -->
+    <a th:href="'/payments/' + ${currentStudent}" > View All Transactions</a>
+</div>
+
+
+
+<div class = "container">
+    <div class = "row">
+        <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class = "text-center"> Proceed with payment </h1>
+            <div class = "card-body">
+                <form th:action="@{/payments}" th:object = "${payment}" method="POST">
+                    <div class ="form-group">
+                        <label> Student ID </label>
+                        <input
+                                th:value="${currentStudent1}"
+                                name = "student"
+                                th:field = "*{student}"
+                                type ="text"
+                                class = "form-control"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Date </label>
+                        <input
+                                type = "date"
+                                name = "date"
+                                th:field = "*{date}"
+                                class = "form-control"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Amount </label>
+                        <input
+                                type = "text"
+                                name = "amount"
+                                th:field = "*{amount}"
+                                class = "form-control"
+                                placeholder="Enter Amount"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Payment Method </label>
+                        <input
+                                type = "text"
+                                name = "typeOfMethod"
+                                th:field = "*{typeOfMethod}"
+                                class = "form-control"
+                                placeholder="Enter Method"
+                        />
+                    </div>
+
+
+                    <div class ="form-group">
+                        <label> Remarks </label>
+                        <input
+                                type = "text"
+                                name = "remarks"
+                                th:field = "*{remarks}"
+                                class = "form-control"
+                                placeholder="Enter Remarks"
+                        />
+                    </div>
+
+
+                    <div class = "box-footer">
+                        <button type="Pay" class = "btn btn-primary">
+                            Submit
+                        </button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<br>
+
+
+<div class = "row">
+
+</div>
+
+<table class = "table table-striped table-bordered">
+    <h6> Please add/select card before the payment</h6>
+    <thead class = "table-dark">
+    <tr>
+        <th>Select</th>
+        <th>ID</th>
+        <th>Student</th>
+        <th>Card Number</th>
+        <th>Exp Year</th>
+        <th>Exp Month</th>
+        <th>Type</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="cardDetail: ${cardDetails}">
+        <td><input type="radio" name="paymentOption" value="${cardDetail.id}" onclick="toggleInputField(this)" required></td>
+        <td th:text="${cardDetail.id}"></td>
+        <td><a th:href="${cardDetail.student.id}" th:text="${cardDetail.student.id}"></a></td>
+        <td th:text="${cardDetail.number}"></td>
+        <td th:text="${cardDetail.expMonth}"></td>
+        <td th:text="${cardDetail.expYear}"></td>
+        <td th:text="${cardDetail.type}"></td>
+        <td><a th:href="'/payments/deleteCard/' + ${cardDetail.id}" class = "btn btn-primary btn-sm mb-3">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+<div id="inputRow" style="display: none;">
+    <p>Enter CVV for the selected card:</p>
+    <input type="text" maxlength="3" size="3" placeholder="CVV" required>
+</div>
+
+<br>
+
+
+
+<br>
+<div class="container">
+    <button class="button is-link" onclick="toggleForm()">Add card details</button>
+    <div id="cardForm" style="display: none;">
+        <h2>Add card details:</h2>
+        <form method="post" th:action="@{/payments/addCard}" th:object="${cardDetails}">
+            <div class="field">
+                <label class="label">Expiration Month:</label>
+                <div class="control">
+                    <input type="text" id="expMonth" name="expMonth" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Expiration Year:</label>
+                <div class="control">
+                    <input type="text" id="expYear" name="expYear" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Card Number:</label>
+                <div class="control">
+                    <input type="text" id="number" name="number" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Card Type:</label>
+                <div class="control">
+                    <input type="text" id="type" name="type" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Student ID:</label>
+                <div class="control">
+                    <input type="text" name="student" th:value="${currentStudent}" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input type="submit" value="Add card" class="button is-link">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+
+
+<script>
+
+    function toggleForm() {
+        var cardForm = document.getElementById("cardForm");
+        if (cardForm.style.display === "none") {
+            cardForm.style.display = "block";
+        } else {
+            cardForm.style.display = "none";
+        }
+    }
+
+  function toggleInputField(radio) {
+    var inputRow = document.getElementById("inputRow");
+    var inputText = document.getElementById("inputText");
+
+    if (radio.checked) {
+      inputRow.style.display = "table-row";
+      inputText.disabled = false;
+      inputText.value = ""; // Clear the input field when shown
+    } else {
+      inputRow.style.display = "none";
+      inputText.disabled = true;
+    }
+  }
+</script>
+</body>
+</html>
