@@ -15,9 +15,7 @@ import java.time.LocalDate;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "payment_method", uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "trans_id"})
-})
+@Table(name = "payment_method")
 public class PaymentMethod {
 
 
@@ -46,8 +44,8 @@ public class PaymentMethod {
     @Column(name = "method", nullable = false)
     private String typeOfMethod;
 
-    @NonNull
-    @Column(name = "trans_id", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "trans_id", unique = true)
     private String transactionId;
 
 

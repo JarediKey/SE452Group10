@@ -12,6 +12,12 @@
  * 8)Created unit tests for tables created.
  * 9)Created services for all the entities.
  * 10)Implemented Swagger documentation for all the services.
+ * 11)Created docker hub for continuous integration through github workflow.
+ * 13)Created Docker compose files to run application along with external database
+ *    configurations.
+ * 14)connected application with two external databases postgres and mangodb.
+ * 15)Learned Authentication, Authorization related concepts aling with user based roles.
+ * 16)
  *
  *    --Data Entity: payment_method, payment_record, card_details
  *
