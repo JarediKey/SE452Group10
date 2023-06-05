@@ -17,12 +17,12 @@ The administrator will have overarching access as a debugger.
 
 ## Project Members
 
-| Member    | Feature    | Note                                                                                                                                                                                                        |
-|-----------|------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Ayyub     | Account    | For all account types which can be logged into this system including Admin, Teacher and Student. Providing service like account CRUD and login.<br />Data Entity: Admin, Teacher, Student                   |
-| Jared     | Course     | Course and GPA CRUD operation, students/teachers search course and GPA by key word(s).<br />Data Entity: Course, GPA                                                                                        |
-| Bhagya    | Enrollment | Students enroll course to learn, teachers enroll course to teach. Also provide operation of dropping classes.<br />Data Entity: TeacherEnrollment, StudentEnrollment                                        |
-| Srinivasa | Payment    | Add/remove payment methods, calculate the fee based on the student's enrollment of courses, load payment records and Save student card details.<br />Data Entity: PaymentMethod, PaymentRecord, CardDetails |
+| Member    | Feature    | Note                                                                                                                                                                                                                                |
+|-----------|------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Ayyub     | Account    | For all account types which can be logged into this system including Admin, Teacher and Student. Providing service like account CRUD and login.<br />Data Entity: Admin, Teacher, Student                                           |
+| Jared     | Course     | Course and GPA CRUD operation, students/teachers search course and GPA by key word(s).<br />Data Entity: Course, GPA                                                                                                                |
+| Bhagya    | Enrollment | Students enroll course to learn, teachers enroll course to teach. Also provide operation of dropping classes.<br />Data Entity: TeacherEnrollment, StudentEnrollment                                                                |
+| Srinivasa | Payment    | Add/remove payment methods, calculate the fee based on the student's enrollment of courses, load payment records and Save student card details.<br />Data Entity: PaymentMethod, PaymentRecord, CardDetails, student_balance(NoSQL) |
 
 <br/>
 
@@ -54,14 +54,14 @@ Will meet using Discord and Zoom. Will meet once a week on tuesday .
 
 ## Decision Made
 
-| # | Area                  | Decision      | Alternative            | Rationale                                                             |
-|---|-----------------------|---------------|------------------------|-----------------------------------------------------------------------|
-| 1 | IDE                   | IntelliJ IDEA | VS Code                | Language independent editor so that it can be used in non java course |
-| 2 | Dependency Management | Gradle        | Maven                  | familiarity                                                           |
-| 3 | Code                  | Lombok        | Code template code     | We have done too many template code and so don't need to learn that   |
-| 3 | Communication Channel | Zoom          | Discord                |                                                                       |
-| 3 | Configurations        | YML           | Application properties | Liked this approach                                                   |
-| 3 | Database              | H2            | Postgres               | Will look into it as the project moves on.                            |
+| # | Area                  | Decision         | Alternative            | Rationale                                                             |
+|---|-----------------------|------------------|------------------------|-----------------------------------------------------------------------|
+| 1 | IDE                   | IntelliJ IDEA    | VS Code                | Language independent editor so that it can be used in non java course |
+| 2 | Dependency Management | Gradle           | Maven                  | familiarity                                                           |
+| 3 | Code                  | Lombok           | Code template code     | We have done too many template code and so don't need to learn that   |
+| 3 | Communication Channel | Zoom             | Discord                |                                                                       |
+| 3 | Configurations        | YML              | Application properties | Liked this approach                                                   |
+| 3 | Database              | Postgres,MongoDB | H2                     | Will look into it as the project moves on.                            |
 
 ## Appendix
 
@@ -93,3 +93,7 @@ Will meet using Discord and Zoom. Will meet once a week on tuesday .
 ![web_09](src/main/resources/img/web/web_09_student_login.png)
 ![web_10](src/main/resources/img/web/web_10_search_course.png)
 ![web_11](src/main/resources/img/web/web_11_course_result.png)
+![web_12](src/main/resources/img/web/web_12_payment_form.png)
+![web_13](src/main/resources/img/web/web_13_student_Pay_with_card.png)
+![web_14](src/main/resources/img/web/web_14-view_trans_admin.png)
+![web_15](src/main/resources/img/web/web_15_form_to_create_card.png)
