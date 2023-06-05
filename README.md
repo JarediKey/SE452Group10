@@ -94,6 +94,6 @@ Will meet using Discord and Zoom. Will meet once a week on tuesday .
 ![web_10](src/main/resources/img/web/web_10_search_course.png)
 ![web_11](src/main/resources/img/web/web_11_course_result.png)
 ![web_12](src/main/resources/img/web/web_12_payment_form.png)
-![web_13](src/main/resources/img/web/web_13_student_pay_with_card.png)
+![web_13](src/main/resources/img/web/web_13_student_Pay_with_card.png)
 ![web_14](src/main/resources/img/web/web_14-view_trans_admin.png)
-![web_14](src/main/resources/img/web/web_15_form_to_create_card.png)
+![web_15](src/main/resources/img/web/web_15_form_to_create_card.png)
