@@ -16,16 +16,18 @@
  * 13)Created Docker compose files to run application along with external database
  *    configurations.
  * 14)connected application with two external databases postgres and mangodb.
- * 15)Learned Authentication, Authorization related concepts aling with user based roles.
- * 16)
+ * 15)Learned Authentication, Authorization related concepts along with user based roles.
+ * 16)Created certificates for valid transactions.
  *
- *    --Data Entity: payment_method, payment_record, card_details
+ *    --Data Entity: payment_method, payment_record, card_details (relational)
+ *    --Data Document : student_balance
  *
  * 1)Created tables payment_method, card_details and payment_record.
  * 2)payment_method table will maintain the records of all the fee payments along with student_id
  *   and the amount paid and so on. Calculate the fee for students based on the enrollment of courses and more.
  * 3)payment_record table will maintain the records of all the course_id and fees for that particular course.
- * 4)card_details table will mainatin the payment details of respective student.
+ * 4)card_details table will maintain the payment details of respective student.
+ * 5)student_table will contain the due balance of the every student.
  *
  *
  *    --UNIT TESTS:
@@ -53,6 +55,9 @@
  *  7)Enabled caching for entire application using '@EnableCaching' annotation.
  *  8)Implemented customized services using different annotations like 'IgnoreJson' etc.,
  *  9)Added api responses for swagger documentation.
+ *  10) Multiple database configurations postgres and mongodb.
+ *  11) added services for the mongodb repository.
+ *  11) created web controllers along with the dynamic ui pages.
  *
  *
  *

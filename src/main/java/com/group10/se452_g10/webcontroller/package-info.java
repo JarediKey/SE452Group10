@@ -2,7 +2,7 @@ package com.group10.se452_g10.webcontroller;
 
 /**
  * In this package, contains web services and implementations.
- * @author Ayyub Jose, Jared Wang
+ * @author Ayyub Jose, Jared Wang, Srinivas Dasari
  *
  * ================Jared Wang================Start================
  * ----------Function implementation----------
@@ -34,4 +34,21 @@ package com.group10.se452_g10.webcontroller;
  *      Uses the redirect: prefix to implement redirection to a specified path.
  * ================Jared Wang================End================
  *
- */
+ *
+
+ * ================Srinivas Dasari===============Start================
+ *
+ *
+ *
+ *  * ----------Function implementation----------
+ *   1. Login as an admin, navigate to New payment to create a payment record.
+ *   2. Page contains form to add payment record and also form to add card for the particular student.
+ *   3. Note, students can view only his/her cards.
+ *   4. create a payment along with one selected card.
+ *   5. Navigate back to admin page and click on payment list to view all the payments.
+ *   6.Login in as a student, navigate to make payment.
+ *   7. create a new payment along with the that create a card to list it in the table and select the radio button
+ *      for the payment and click pay.
+ *   8. Navigate to all transactions from top left and student can see their payment records.
+ *
+ *  ================Jared Wang================End================*/
