@@ -1,6 +1,9 @@
 package com.group10.se452_g10.enrollment;
 import java.util.List;
 
+import com.group10.se452_g10.course.Course;
+import com.group10.se452_g10.course.GPA;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +28,24 @@ public class StudentEnrollmentService {
         return retval;
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public StudentEnrollment save(@RequestBody StudentEnrollment student) {
         log.traceEntry("enter save", student);
-        repo.save(student);
+        var result = repo.save(student);
         log.traceExit("exit save", student);
-        return student;
+        return result;
     }
+
+    @PostMapping("/queryByStudentId")
+    @Operation(summary = "Query and list the courses enrolled by the student.")
+    public List<Course> getAllCoursesByStudentId(String id) {
+        log.traceEntry("enter list");
+        var result = repo.getAllCoursesByStudentId(id);
+        log.traceExit("exit list");
+        return result;
+    }
+
+
 
     @PostMapping("/valid")
     public ResponseEntity<StudentEnrollment> saveValidated(@Valid @RequestBody StudentEnrollment student) {
@@ -42,7 +56,7 @@ public class StudentEnrollmentService {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id ) {
+    public void delete(@PathVariable Long id) {
         log.traceEntry("Enter delete", id);
         repo.deleteById(id);
         log.traceExit("Exit delete");

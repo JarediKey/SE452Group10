@@ -1,11 +1,9 @@
 package com.group10.se452_g10.enrollment;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import com.group10.se452_g10.account.Student;
+import com.group10.se452_g10.course.Course;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Data
 @Entity(name = "student_enrollments")
@@ -14,7 +12,19 @@ import lombok.NoArgsConstructor;
 public class StudentEnrollment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private long StudentId;
-    private long CourseId;
+    private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "Course", nullable = false)
+    private Course course;
+
+    @ManyToOne
+    @JoinColumn(name = "StudentId", nullable = false)
+    private Student student;
+
+    public StudentEnrollment(Course course, Student student) {
+        this.course = course;
+        this.student = student;
+
+    }
 }
