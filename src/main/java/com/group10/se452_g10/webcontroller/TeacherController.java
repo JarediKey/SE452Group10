@@ -19,7 +19,6 @@ import java.util.Optional;
 public class TeacherController {
     @Autowired
     private TeacherRepo repo;
-
     @Autowired
     private PasswordEncoder encoder;
 

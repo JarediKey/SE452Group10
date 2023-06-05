@@ -9,7 +9,7 @@ app:
 
 spring:
   profiles:
-    active: prod
+    active: dev
     include: security-sql, security-register
 
 server:
