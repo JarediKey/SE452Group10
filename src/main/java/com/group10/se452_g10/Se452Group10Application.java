@@ -13,6 +13,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
+
 @Log4j2
 @SpringBootApplication
 @RestController
@@ -28,10 +30,8 @@ public class Se452Group10Application {
     }
 
     @GetMapping("/")
-    public String index() {
-
-        return "Greetings, from Spring Boot!11--  Hey DS ";
-
+    public RedirectView index() {
+        return new RedirectView("/login");
     }
 
     @Bean
