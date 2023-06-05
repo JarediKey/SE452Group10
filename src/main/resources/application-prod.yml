@@ -21,7 +21,15 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: password
+
   jpa:
     generate-ddl: true
     show-sql: true
     defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
